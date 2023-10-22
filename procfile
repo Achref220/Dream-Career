@@ -1,0 +1,2 @@
+web: concurrently "npm run start-socket"
+
