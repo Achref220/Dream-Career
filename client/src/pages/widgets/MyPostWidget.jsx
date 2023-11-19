@@ -63,7 +63,8 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
   };
 
   const handlePost = async (e) => {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
     formData.append("username", username);
     formData.append("caption", post);
 
@@ -87,6 +88,10 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
     setImageUrls([]);
     setImage(null);
     setPost("");
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -100,6 +105,8 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
       setErrors({});
       handlePost();
     } catch (err) {
+      console.log("error detected");
+      setLoading(false);
       const validationErrors = {};
       err.inner.forEach((error) => {
         validationErrors[error.path] = error.message;

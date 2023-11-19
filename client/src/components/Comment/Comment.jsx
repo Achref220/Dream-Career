@@ -106,6 +106,7 @@ const CommentBox = ({ postId, commentCount, isNonMobileScreens }) => {
       setLoading(true);
       try {
         const response = await fetch(SERVER_URL + `p/${postId}/comments`, {
+          method : "GET",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -128,7 +129,7 @@ const CommentBox = ({ postId, commentCount, isNonMobileScreens }) => {
 
   useEffect(() => {
     getComments();
-  }, []);
+  },[] );
 
   return (
     <Box

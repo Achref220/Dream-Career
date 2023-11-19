@@ -19,13 +19,14 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { setLogout } from '../../state';
 import { useDispatch } from 'react-redux';
 
+
 export default function AccountMenu({ username, profilePhotoUrl}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const { palette } = useTheme();
 
-  const grey = palette.grey
+  const grey = palette.grey;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ export default function AccountMenu({ username, profilePhotoUrl}) {
       >
         <MenuItem 
            sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
-           onClick={() => navigate('/profile')}> 
+           onClick={() => navigate('/profilePage')}> 
            <ListItemIcon>        
              <PersonOutlineIcon sx={{  marginRight: "1rem", color : grey, fontSize: "1.3rem"}}/>
           </ListItemIcon>
@@ -100,6 +101,7 @@ export default function AccountMenu({ username, profilePhotoUrl}) {
         </MenuItem>
         <MenuItem
            sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/Saved')}
         > 
         <ListItemIcon>
           <BookmarkBorderIcon fontSize="medium" sx={{ marginRight: "1rem", color : grey }}/> 
@@ -108,6 +110,7 @@ export default function AccountMenu({ username, profilePhotoUrl}) {
         </MenuItem>
         <MenuItem
            sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/Settings')} 
         >
           <ListItemIcon>
             <SettingsIcon fontSize="medium" />
@@ -116,6 +119,7 @@ export default function AccountMenu({ username, profilePhotoUrl}) {
         </MenuItem>
         <MenuItem
            sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/reportProblem')}
         >
           <ListItemIcon>
             <FlagIcon fontSize="medium" />
