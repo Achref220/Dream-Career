@@ -26,6 +26,9 @@
   "dependencies": {
     "express": "^4.17.1"
   },
+  "engines": {
+    "node": ">=18.12.1 <19.0.0"
+  },
   "devDependencies": {
     "concurrently": "^7.6.0"
   }
