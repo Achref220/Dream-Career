@@ -75,6 +75,7 @@ const DirectMessagePage = ({ isModal = false }) => {
     socket.on("getUsers", (users) => {
       setOnlineUsers(users);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -104,6 +105,7 @@ const DirectMessagePage = ({ isModal = false }) => {
       }
     };
     getConversations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, onlineUsers]);
 
   useEffect(() => {
@@ -126,6 +128,7 @@ const DirectMessagePage = ({ isModal = false }) => {
     };
 
     getMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentChat]);
 
   useEffect(() => {

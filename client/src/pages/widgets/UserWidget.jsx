@@ -34,7 +34,6 @@ const UserWidget = ({ username, profilePhotoUrl }) => {
   const followers = useSelector((state) => state.user.followers);
 
   //colors
-  const { dark, medium, main } = palette.neutral;
   const theme = useTheme();
   const light = theme.palette.background.light;
   console.log(light);
@@ -53,6 +52,7 @@ const UserWidget = ({ username, profilePhotoUrl }) => {
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [followings, followers]);
 
   if (!user) {

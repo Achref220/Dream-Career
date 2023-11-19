@@ -87,12 +87,14 @@ const SearchBar = () => {
         getSuggestions();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
 
   useEffect(() => {
     if (isListOpen && isClosed) {
       handleClose();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClosed]);
 
   const { palette } = useTheme();

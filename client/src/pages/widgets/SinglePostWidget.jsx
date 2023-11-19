@@ -107,6 +107,7 @@ const SinglePostWidget = ({
 
   useEffect(() => {
     getLikes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -229,10 +230,10 @@ const SinglePostWidget = ({
           >
             {!isComments
               ? `View ${
-                  commentCount > 1
-                    ? "all" + " " + commentCount + " " + "comments"
-                    : commentCount + " " + "comment"
-                }`
+                commentCount > 1
+                  ? `all ${commentCount} comments`
+                  : `${commentCount} comment`
+              }`
               : "Hide comments"}
           </Typography>
         ) : null}

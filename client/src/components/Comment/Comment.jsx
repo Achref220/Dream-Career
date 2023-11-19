@@ -129,7 +129,8 @@ const CommentBox = ({ postId, commentCount, isNonMobileScreens }) => {
 
   useEffect(() => {
     getComments();
-  },[] );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   return (
     <Box

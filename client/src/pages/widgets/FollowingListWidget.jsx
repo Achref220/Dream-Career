@@ -66,6 +66,7 @@ const FollowingListWidget = ({ username , isProfile=false }) => {
     useEffect(() => {
         getFollowings();
         getFollowers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     if(isLoading){

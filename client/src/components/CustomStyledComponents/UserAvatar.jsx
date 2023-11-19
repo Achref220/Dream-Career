@@ -21,6 +21,8 @@ const UserAvatar = ({ image, size = "60px", isLoading }) => {
         width={size}
         height={size}
         src={image}
+
+        alt="avatar"
       />
     </Box>
   );

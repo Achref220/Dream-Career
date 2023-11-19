@@ -100,6 +100,7 @@ const PostsWidget = ({ username, isProfile = false }) => {
     } else {
       getPosts();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   if (isLoading) {

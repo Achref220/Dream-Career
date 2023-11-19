@@ -14,7 +14,7 @@ const PostOptionsModal = ({ open, setOpen, postId }) => {
   const [post, setPost] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const { light: neutralLight, dark, medium } = palette.neutral;
+  const { medium } = palette.neutral;
   const bg = palette.background.alt;
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const PostOptionsModal = ({ open, setOpen, postId }) => {
     };
 
     getPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleEditClick = async () => {
