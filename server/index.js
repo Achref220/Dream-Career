@@ -16,7 +16,7 @@ const io = require("socket.io")(server, {
   cors: {
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://nameless-basin-36851.herokuapp.com"
+        ? "https://dreamcareer.onrender.com"
         : "http://localhost:" + PORT,
   },
   transports: ["websocket", "polling"],
