@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname + "/public")));
+app.use(express.static(path.join(__dirname + "../client/public")));
 
 /*================== Security ==================*/
 if (process.env.NODE_ENV === "production") {
@@ -74,9 +74,9 @@ const routes = require("./routes");
 app.use(routes);
 
 // Serve the index.html file from the public folder
-if (process.env.NODE_ENV === "production") {
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+if (process.env.NODE_ENV === 'production') {
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
   });
 }
 
