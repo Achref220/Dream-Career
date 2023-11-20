@@ -52,9 +52,10 @@ if (process.env.NODE_ENV === "production") {
   // Enable CORS for all routes
   app.use(
     cors({
-      origin: ["https://dreamcareer.onrender.com/"],
+      origin: ["https://dreamcareer.onrender.com"],
     })
   );
+  app.options('*', cors());
 } else {
   app.use(cors());
 }
