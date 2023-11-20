@@ -23,7 +23,7 @@ module.exports = {
       
         // if no token, return request object as is
         if (!token) {
-          return res.status(403).send("Access Denied")
+          return res.status(403).send("----------- Access is Denied -----------")
         }
       
         try {
