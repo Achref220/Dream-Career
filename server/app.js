@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === "production") {
   // Enable CORS for all routes
   app.use(
     cors({
-      origin: ["http://localhost:4000/"],
+      origin: ["https://dreamcareer.onrender.com/"],
     })
   );
 } else {
