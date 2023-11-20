@@ -25,8 +25,6 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname + "../client/public")));
-
 /*================== Security ==================*/
 if (process.env.NODE_ENV === "production") {
   // Use the helmet middleware to set the default CSP
@@ -75,9 +73,10 @@ app.use(routes);
 
 // Serve the index.html file from the public folder
 if (process.env.NODE_ENV === 'production') {
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
-  });
+  app.use(express.static('../client/build'));
+  app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  })
 }
 
 module.exports = app;
