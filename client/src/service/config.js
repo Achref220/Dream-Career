@@ -6,7 +6,7 @@ const config = {
   SOCKET_URL:
     process.env.REACT_APP_ENV === "Development"
       ? "ws://localhost:8900/"
-      : `wss://https://dreamcareer.onrender.com/`,
+      : `wss://dreamcareer.onrender.com/`,
 };
 
 export const SERVER_URL = config.SERVER_URL;

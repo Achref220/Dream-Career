@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === "production") {
           "'self'",
         ],
         imgSrc: ["'self'", "*", "blob:", "data:"],
-        connectSrc: ["'self'", "wss://nameless-basin-36851.herokuapp.com"],
+        connectSrc: ["'self'", "wss://dreamcareer.onrender.com/"],
       },
     })
   );
