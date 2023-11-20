@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "https://dreaca.com/"
+  to = "https://dreamcareer.onrender.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
