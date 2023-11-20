@@ -48,18 +48,22 @@ if (process.env.NODE_ENV === "production") {
       },
     })
   );
-
-  // Enable CORS for all routes
-  app.use(
-    cors({
-      origin: ["https://dreamcareer.onrender.com"],
-    })
-  );
-  app.options('*', cors());
-} else {
-  app.use(cors());
+  
+  // Enable CORS for all routes in production
+  if (process.env.NODE_ENV === "production") {
+    app.use(
+      cors({
+        origin: ["https://dreaca.com"],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+      })
+    );
+  } else {
+    // For non-production environments, allow all origins with the cors() middleware
+    app.use(cors());
+  }
 }
-
 // app.use(morgan("common"));
 
 //To ensure that all incoming user input is properly sanitized
