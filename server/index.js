@@ -10,6 +10,7 @@ const server = app.listen(PORT, () => {
 /*================== MONGODB =================*/
 db.once("open", () => {
   console.log("🚀 MongoDB database connected 🚀");
+  console.log("Environment is", process.env.NODE_ENV)
 });
 
 const io = require("socket.io")(server, {
