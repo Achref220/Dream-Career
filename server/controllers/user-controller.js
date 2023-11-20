@@ -10,7 +10,7 @@ module.exports = {
       const { usernameorid } = params;
       // Check if usernameoruserid is a valid ObjectId
       const isValidObjectId = mongoose.isValidObjectId(usernameorid);
-
+  
       let user;
       if (isValidObjectId) {
         // Find user by id
@@ -19,10 +19,11 @@ module.exports = {
         // Find user by username
         user = await User.findOne({ username: usernameorid });
       }
-
-      //hide users password from frontend
+  
+      // Hide user's password from the frontend
       user.password = undefined;
-
+  
+      res.setHeader('Content-Type', 'application/json'); // Set content type explicitly
       res.status(200).json(user);
     } catch (err) {
       res.status(404).json({ message: err.message });
