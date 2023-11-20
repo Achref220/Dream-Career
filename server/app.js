@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
         ],
         fontSrc: [
           "https://fonts.gstatic.com",
-          "https://nameless-basin-36851.herokuapp.com",
+          "https://dreamcareer.onrender.com",
           "'self'",
         ],
         imgSrc: ["'self'", "*", "blob:", "data:"],
