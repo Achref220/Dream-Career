@@ -119,12 +119,13 @@ export default function AccountMenu({ username, profilePhotoUrl}) {
         </MenuItem>
         <MenuItem
            sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
-           onClick={() => navigate('/reportProblem')}
         >
           <ListItemIcon>
             <FlagIcon fontSize="medium" />
           </ListItemIcon>
-            Report Problem
+          <a href="https://github.com/Achref220/Dream-Career/issues" target='_blanc' style={{color: "black"}}>
+          Report Problem
+          </a>
         </MenuItem>
 
         <Divider />

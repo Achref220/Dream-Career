@@ -1,9 +1,8 @@
-import { Box, useMediaQuery, Skeleton, Divider } from "@mui/material";
+import { Box, useMediaQuery, Skeleton, Divider, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
 import Navbar from "../../components/navbar";
 import FollowingListWidget from "../widgets/FollowingListWidget";
 
@@ -30,6 +29,7 @@ const ProfilePage = () => {
 
   const { username: signedInUsername } = useSelector((state) => state.user);
   const { username } = useParams();
+  const { palette } = useTheme();
 
   const getUser = async () => {
     const targetUsername = username || signedInUsername;
@@ -303,7 +303,17 @@ const ProfilePage = () => {
               </WidgetWrapper>
             ))
           ) : (
+            <>
+            <Typography
+              color={palette.neutral.dark}
+              variant="h5"
+              fontWeight="500"
+              sx={{ mb: "1.5rem" }}
+            >
+               Your Posts
+            </Typography>
             <PostsWidget isProfile={true} username={user.username} />
+            </>
           )}
         </Box>
       </Box>

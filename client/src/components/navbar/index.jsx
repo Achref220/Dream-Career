@@ -64,6 +64,8 @@ const Navbar = () => {
         sx={{ position: "fixed", width: "100%" }}
       >
         <FlexBetween gap="1.75rem">
+        <div style={{display: "flex"}}>
+        <img onClick={() => navigate("/")} width={"50px"} src="/assets/logo png.png" alt="rt" />
           <Typography
             fontWeight="bold"
             fontSize="clamp(1rem, 2rem, 2.25rem)"
@@ -76,8 +78,9 @@ const Navbar = () => {
               },
             }}
           >
-            Dream Career
+            ream Career
           </Typography>
+        </div>
           {isNonMobileScreens && <SearchBar />}
         </FlexBetween>
 

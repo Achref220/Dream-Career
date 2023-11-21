@@ -1,7 +1,6 @@
 import Navbar from "../../components/navbar";
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
-import UserWidget from "../widgets/UserWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FollowingListWidget from "../widgets/FollowingListWidget";
@@ -20,14 +19,10 @@ const HomePage = () => {
         padding="2rem 6%"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="0.5rem"
-        justifyContent="space-between"
+        justifyContent="space-around"
       >
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget username={username} profilePhotoUrl={profilePhotoUrl} />
-        </Box>
-
         <Box
-          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          flexBasis={isNonMobileScreens ? "50%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget profilePhotoUrl={profilePhotoUrl} />
