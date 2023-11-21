@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
@@ -28,7 +28,7 @@ const initialValuesRegister = {
 };
 
 const initialValuesLogin = {
-  email: "",
+  username: "",
   password: "",
 };
 
@@ -49,7 +49,7 @@ const Form = () => {
     setLoading(true);
 
     try {
-      console.log(process.env.REACT_APP_ENV)
+      console.log(process.env.REACT_APP_ENV);
       const res = await fetch(SERVER_URL + "register", {
         method: "POST",
         body: JSON.stringify({
@@ -82,7 +82,7 @@ const Form = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
         navigate("/");
       } else {
         toast.error("Something went wrong !!!", {
@@ -94,7 +94,7 @@ const Form = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
         onSubmitProps.setFieldError(data.field, data.errorMsg);
       }
     } catch (err) {
@@ -107,11 +107,11 @@ const Form = () => {
     setLoading(true);
 
     try {
-      const { email, password } = values;
+      const { username, password } = values;
 
       const loggedInResponse = await fetch(SERVER_URL + "login", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
       });
 
@@ -135,10 +135,10 @@ const Form = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
         navigate("/");
       } else {
-        toast.error('Incorret Credentials !!!', {
+        toast.error("Incorret Credentials !!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -147,7 +147,7 @@ const Form = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
       }
 
       onSubmitProps.resetForm();
@@ -163,7 +163,7 @@ const Form = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ marginTop: '150px', backgroundColor: '#ffff', borderRadius: "7px" }}> 
       <ToastContainer />
       <Typography
         fontWeight="bold"
@@ -181,7 +181,6 @@ const Form = () => {
       >
         Dream Career
       </Typography>
-
 
       <Formik
         initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -210,17 +209,15 @@ const Form = () => {
               {isRegister && (
                 <>
                   <TextField
-                    label="Username"
+                    label="Email"
                     onBlur={handleBlur}
                     onChange={(e) => {
                       handleChange(e);
                     }}
-                    value={values.username}
-                    name="username"
-                    error={
-                      Boolean(touched.username) && Boolean(errors.username)
-                    }
-                    helperText={touched.username && errors.username}
+                    value={values.email}
+                    name="email"
+                    error={Boolean(touched.email) && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
                     sx={{ gridColumn: "span 4" }}
                   />
                   <TextField
@@ -251,17 +248,18 @@ const Form = () => {
               )}
 
               <TextField
-                label="Email"
+                label="Username"
                 onBlur={handleBlur}
                 onChange={(e) => {
                   handleChange(e);
                 }}
-                value={values.email}
-                name="email"
-                error={Boolean(touched.email) && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
+                value={values.username}
+                name="username"
+                error={Boolean(touched.username) && Boolean(errors.username)}
+                helperText={touched.username && errors.username}
                 sx={{ gridColumn: "span 4" }}
               />
+
               <TextField
                 label="Password"
                 type="password"
