@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FOR-TIMI/chatter.git"
+    "url": "git+https://github.com/Achref220/Dream-Career.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FOR-TIMI/chatter/issues"
+    "url": "https://github.com/Achref220/Dream-Career/issues"
   },
   "homepage": "https://github.com/FOR-TIMI/chatter#readme",
   "dependencies": {
