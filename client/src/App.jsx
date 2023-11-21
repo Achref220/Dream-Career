@@ -9,6 +9,9 @@ import HomePage from './pages/homePage'
 import LoginPage from './pages/loginPage'
 import ProfilePage from './pages/profilePage'
 import DirectMessagePage from './pages/DirectMessagePage'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -41,6 +44,7 @@ const App = () => {
     <main>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
+        <ToastContainer />
           <CssBaseline/>
           <Routes>
             <Route path='/' element={isLoggedIn ? <HomePage/> : <Navigate to="/login" />}/>

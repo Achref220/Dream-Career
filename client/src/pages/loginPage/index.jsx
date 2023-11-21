@@ -9,13 +9,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setLogin, setPerson } from "../../state";
 
-import ErrorAlert from "../../components/ErrorAlert";
 import { SERVER_URL } from "../../service/config";
 import { loginSchema, registerSchema } from "../../utils/Schemas";
 
@@ -35,7 +35,6 @@ const initialValuesLogin = {
 const Form = () => {
   const location = useLocation().pathname.slice(1);
   const [pageType, setPageType] = useState(location); //To turn '/register' to 'register'
-  const [globalError, setGlobalError] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { palette } = useTheme();
@@ -74,10 +73,29 @@ const Form = () => {
         );
         dispatch(setPerson({ person: data.newUser }));
         onSubmitProps.resetForm();
+        toast.success("Account created !!!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         navigate("/");
       } else {
+        toast.error("Something went wrong !!!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         onSubmitProps.setFieldError(data.field, data.errorMsg);
-        setGlobalError((prevErrors) => [...prevErrors, data.errorMsg]);
       }
     } catch (err) {
       console.error(err);
@@ -106,12 +124,30 @@ const Form = () => {
             token: loggedIn.token,
           })
         );
-
+        console.log("loggedIn.user", loggedIn.user);
         dispatch(setPerson({ person: loggedIn.user }));
-
+        toast.success(`Welcome back ${loggedIn.user.username}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         navigate("/");
       } else {
-        setGlobalError((prevErrors) => [...prevErrors, "Incorret Credentials"]);
+        toast.error('Incorret Credentials !!!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
 
       onSubmitProps.resetForm();
@@ -128,6 +164,7 @@ const Form = () => {
 
   return (
     <Container maxWidth="sm">
+      <ToastContainer />
       <Typography
         fontWeight="bold"
         textAlign="center"
@@ -145,9 +182,6 @@ const Form = () => {
         Dream Career
       </Typography>
 
-      {globalError.length ? (
-        <ErrorAlert errors={globalError}></ErrorAlert>
-      ) : null}
 
       <Formik
         initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -179,7 +213,6 @@ const Form = () => {
                     label="Username"
                     onBlur={handleBlur}
                     onChange={(e) => {
-                      setGlobalError([]);
                       handleChange(e);
                     }}
                     value={values.username}
@@ -221,7 +254,6 @@ const Form = () => {
                 label="Email"
                 onBlur={handleBlur}
                 onChange={(e) => {
-                  setGlobalError([]);
                   handleChange(e);
                 }}
                 value={values.email}
@@ -272,7 +304,6 @@ const Form = () => {
               </Button>
               <Typography
                 onClick={() => {
-                  setGlobalError([]);
                   setPageType(isLogin ? "register" : "login");
                   navigate(isLogin ? "/register" : "/login");
                   resetForm();

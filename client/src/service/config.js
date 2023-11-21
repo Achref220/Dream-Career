@@ -2,7 +2,7 @@ const config = {
   SERVER_URL:
     process.env.REACT_APP_ENV === "Development"
       ? "http://localhost:8900/"
-      : "https://dreamcareer.onrender.com/",
+      : "http://localhost:8900/",
   SOCKET_URL:
     process.env.REACT_APP_ENV === "Development"
       ? "ws://localhost:8900/"
