@@ -36,14 +36,7 @@ export const registerSchema = yup.object().shape({
 
 export const loginSchema = yup.object().shape({
   username: yup.string().required("required"),
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(8, "Invalid password")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!()-.?[\]_`~;:@#$%^&*+=])[a-zA-Z0-9!()-.?[\]_`~;:@#$%^&*+=]{8,}$/,
-      "Invalid password"
-    ),
+  password: yup.string().required("Password is required")
 });
 
 export const postSchema = yup.object().shape({
