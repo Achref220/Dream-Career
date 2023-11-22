@@ -1,6 +1,6 @@
 <h1 align="center">Dream Career</h1>
 <h3 align="center">Technologies Used</h3>
-<div align="center">
+<div>
 MongoDB: A powerful and flexible NoSQL database that allows Chatter to store and retrieve data efficiently and quickly. <br/>
 Mongoose ODM: A powerful Object Data Modeling (ODM) library that simplifies interactions between MongoDB and the Chatter application. <br/>
 Express: A lightweight framework for building web applications and APIs that allows Chatter to handle HTTP requests and responses. <br/>
