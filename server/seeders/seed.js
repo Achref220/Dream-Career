@@ -79,15 +79,15 @@ console.log('\n=============DELETED ALL CURRENT CONVERSATIONS=================\n
      */
     const postImageUrls = [
         {
-          url: `https://res.cloudinary.com/diskudcr3/image/upload/c_scale,h_521/v1672524602/chatter/gvvxsfb3v5l76csavwzk.png`,
-          filename: "chatter/gvvxsfb3v5l76csavwzk.png"
+          url: `https://res.cloudinary.com/diskudcr3/image/upload/c_scale,h_521/v1672524602/dreaca/gvvxsfb3v5l76csavwzk.png`,
+          filename: "dreaca/gvvxsfb3v5l76csavwzk.png"
         }
     ]
 
     if(i % 2 === 0){
       postImageUrls.unshift({
-        url: 'https://res.cloudinary.com/diskudcr3/image/upload/c_scale,h_521/v1672524603/chatter/ftdouuixfhvefz5vdgom.png',
-        filename: "/chatter/ftdouuixfhvefz5vdgom.png"
+        url: 'https://res.cloudinary.com/diskudcr3/image/upload/c_scale,h_521/v1672524603/dreaca/ftdouuixfhvefz5vdgom.png',
+        filename: "/dreaca/ftdouuixfhvefz5vdgom.png"
       })
     }
    

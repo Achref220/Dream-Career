@@ -172,7 +172,7 @@ const { authMiddleware } = require('../middleware/jwt-config');
  *         description: User not found with the specified ID or no followings available.
 
  * @swagger
- * /users/{userId}/followers:
+ * /u/{userId}/followers:
  *   get:
  *     security:
  *       - Authorization: []

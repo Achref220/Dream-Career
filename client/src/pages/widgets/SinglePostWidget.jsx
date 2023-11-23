@@ -74,8 +74,9 @@ const SinglePostWidget = ({
       },
       body: JSON.stringify({ username }),
     });
-
+    
     const updatedPost = await response.json();
+    console.log(updatedPost);
     dispatch(setPost({ post: updatedPost }));
     getLikes();
   };

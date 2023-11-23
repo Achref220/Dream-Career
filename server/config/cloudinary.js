@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "chatter",
+    folder: "dreaca",
     allowedFormats: ["jpeg", "png", "jpg"],
   },
 });

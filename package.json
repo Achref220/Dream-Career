@@ -1,5 +1,5 @@
 {
-  "name": "chatter",
+  "name": "dreaca",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Achref220/Dream-Career/issues"
   },
-  "homepage": "https://github.com/FOR-TIMI/chatter#readme",
+  "homepage": "https://github.com/FOR-TIMI/Dream-Career#readme",
   "dependencies": {
     "express": "^4.17.1"
   },
