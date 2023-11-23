@@ -3,6 +3,7 @@ const { Message} =require('../model');
 module.exports = {
     //To send a message
     async sendMessage({body}, res){
+        console.log(body);
         try{
             const newMessage = await Message.create(body);
             res.status(200).json(newMessage);

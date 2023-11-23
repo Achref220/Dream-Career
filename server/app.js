@@ -1,6 +1,7 @@
 /*================== Global Imports =================*/
 const express = require("express");
 const app = express();
+const swaggerSetup = require('./swagger'); // Replace with your Swagger setup file path
 
 const dotenv = require("dotenv");
 
@@ -68,6 +69,9 @@ if (process.env.NODE_ENV === "production") {
 
 //To ensure that all incoming user input is properly sanitized
 app.use(sanitizeMiddleware);
+
+// swagger SETUP
+swaggerSetup(app);
 
 // sanitize-mongo middleware to protect against MongoDB injection attacks
 app.use(sanitizeMongo({ replaceWith: "_" }));

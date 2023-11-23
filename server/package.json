@@ -9,6 +9,7 @@
     "watch": "nodemon"
   },
   "dependencies": {
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cloudinary": "^1.33.0",
@@ -23,7 +24,9 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "keywords": [],
   "author": "",
