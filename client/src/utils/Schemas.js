@@ -39,6 +39,21 @@ export const loginSchema = yup.object().shape({
   password: yup.string().required("Password is required")
 });
 
+
+export const updatePasswordSchema = yup.object().shape({
+  currentPassword: yup.string().required("Current password is required"),
+  newPassword: yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!()-.?[\]_`~;:@#$%^&*+=])[a-zA-Z0-9!()-.?[\]_`~;:@#$%^&*+=]{8,}$/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one of the following special characters: !()-.?[]_`~;:@#$%^&*+="
+    ),
+  confirmNewPassword: yup.string()
+    .required("Confirmation is required")
+    .oneOf([yup.ref('newPassword')], 'Passwords must match'),
+});
+
 export const postSchema = yup.object().shape({
   caption: yup
     .string()

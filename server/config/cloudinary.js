@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "dreaca",
-    allowedFormats: ["jpeg", "png", "jpg"],
+    allowedFormats: ["jpeg", "png", "jpg", "mp4", "avi", "mov"],
   },
 });
 
@@ -20,3 +20,4 @@ module.exports = {
   cloudinary,
   storage,
 };
+

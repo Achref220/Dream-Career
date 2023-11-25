@@ -1,8 +1,11 @@
 const { User } = require("../model");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   // ...
+
+  
 
   /**================ GET ONE USER ==================== */
   async getUser({ params }, res) {
@@ -105,6 +108,45 @@ module.exports = {
       res.status(200).json(formattedFollowings);
     } catch (err) {
       res.status(404).json({ message: err.message });
+    }
+  },
+
+  /**================ Update current user password ==================== */
+  async updateUserPassword(req, res) {
+    try {
+      const { params, body } = req;
+      const username = params.userId
+      const { currentPassword, newPassword } = body;
+
+      User.findOne({ username }, async (err, user) => {
+        if (err) {
+          return res.status(500).json({ error: 'Internal Server Error' });
+        }
+      
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+      
+        try {
+          const isCorrectPassword = await user.isCorrectPassword(currentPassword);
+      
+          if (!isCorrectPassword) {
+            console.log("Invalid current password");
+            return res.status(401).json({ error: 'Invalid current password' });
+          }
+      
+          user.password = newPassword;
+          await user.save();
+          console.log('Password updated successfully');
+          return res.status(200).json({ message: 'Password updated successfully' });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).json({ error: 'Internal Server Error' });
+        }
+      })
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
 

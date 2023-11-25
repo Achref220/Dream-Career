@@ -45,6 +45,7 @@ module.exports = {
 
       //Invalid password
       if (!isValidPasword) {
+        console.log("invalid password");
         return res.status(400).json({ message: "Invalid credentials" });
       }
 

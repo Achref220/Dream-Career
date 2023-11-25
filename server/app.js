@@ -55,14 +55,13 @@ if (process.env.NODE_ENV === "production") {
 if (process.env.NODE_ENV === "production") {
   app.use(
     cors({
-      origin: ["https://dreaca.com"],
+      origin: "*",
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true,
     })
   );
 } else {
-  // For non-production environments, allow all origins with the cors() middleware
   app.use(cors());
 }
 // app.use(morgan("common"));

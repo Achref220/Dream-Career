@@ -5,7 +5,8 @@ const {
     ,getUserFollowers
     ,getUserFollowings
     ,addRemoveFollow
-    ,getUsers
+    ,getUsers,
+    updateUserPassword
 } = require('../controllers/user-controller');
 
 /**=========== post controller to get a user's posts ============== */
@@ -19,6 +20,7 @@ const { authMiddleware } = require('../middleware/jwt-config');
     router.get('/', authMiddleware,getUsers)
     router.get('/:usernameorid',authMiddleware, getUser); //get a single user
     router.get('/:username/posts', authMiddleware, getUserPosts) // get a user's posts
+    router.route('/:userId/update-password').put(authMiddleware, updateUserPassword) //update current user password
 
     router
         .route('/:userId/followings')

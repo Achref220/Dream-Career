@@ -26,6 +26,7 @@ import { themeSettings } from "./utils/theme";
 import { setLogout } from './state'
 
 import useTokenExpiration from './utils/checkToken'
+import Settings from './pages/Settings/Settings'
 
 
 const App = () => { 
@@ -62,6 +63,10 @@ const App = () => {
             <Route path="/profilePage">
                 <Route path=":username" element={isLoggedIn ? <ProfilePage/> : <Navigate to="/login" />} />
                 <Route path="" element={isLoggedIn ? <ProfilePage/> : <Navigate to="/login" />} />
+            </Route>
+
+            <Route path="/settings">
+                <Route path='/settings'  element={isLoggedIn ? <Settings /> : <Navigate to="/login" />} />
             </Route>
 
             <Route
