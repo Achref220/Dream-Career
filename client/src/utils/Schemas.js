@@ -4,7 +4,7 @@ export const registerSchema = yup.object().shape({
   username: yup
     .string()
     .required("Username is required")
-    .min(8, "Username must be at least 8 characters long")
+    .min(4, "Username must be at least 4 characters long")
     .matches(
       /^[a-zA-Z0-9!()-.?[\]_`~;:@#$%^&*+=]+$/,
       "Username can only contain letters, numbers, and the following special characters: !()-.?[]_`~;:@#$%^&*+="
