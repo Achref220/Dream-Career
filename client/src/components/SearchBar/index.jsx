@@ -171,7 +171,7 @@ const SearchBar = () => {
                 }}
               >
                 <FlexBetween gap="1rem">
-                  <UserAvatar image={profilePhotoUrl} size="32px" />
+                  <UserAvatar image={profilePhotoUrl[0]?.url ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="32px" />
                   <Box>
                     <Typography color={main} variant="h5" fontWeight="500">
                       {username.length > 17

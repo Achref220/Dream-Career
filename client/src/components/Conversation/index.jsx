@@ -61,11 +61,11 @@ const Conversation = ({ conversation, currentUser }) => {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               variant="dot"
             >
-              <UserAvatar image={user?.profilePhotoUrl} size="35px" />
+              <UserAvatar image={(user.profilePhotoUrl?.length > 0) ? user.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="35px" />
             </StyledBadge>
           </Stack>
         ) : (
-          <UserAvatar image={user?.profilePhotoUrl} size="35px" />
+          <UserAvatar image={(user.profilePhotoUrl?.length > 0) ? user.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="35px" />
         )}
 
         <Box flexGrow={3.5} margin="0 0.5rem">

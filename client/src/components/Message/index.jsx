@@ -26,7 +26,7 @@ const Message = ({
         alignItems="flex-end"
         gap={0.5}
       >
-        {!isAuthor && <UserAvatar image={profilePhoto} size="25px" />}
+        {!isAuthor && <UserAvatar image={profilePhoto[0]?.url ? profilePhoto[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="25px" />}
 
         <Typography
           padding="10px"

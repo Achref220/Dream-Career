@@ -111,6 +111,38 @@ module.exports = {
     }
   },
 
+  async updateUserProfile({ body, files }, res) {
+    try {
+      const { username, location, email, occupation } = body;
+
+      User.findOne({ username }, async (err, user) => {
+        if (err) {
+          return res.status(500).json({ error: 'Internal Server Error' })
+        }
+        if (!user) {
+          return res.status(401).json({ error: 'User not found' })
+        }
+        const fileArr = files.map((obj) => ({ url: obj["path"], filename: obj["filename"] })) || undefined;
+
+        user.profilePhotoUrl = fileArr
+        user.location = location
+        user.email = email
+        user.occupation = occupation
+
+        await user.save()
+        console.log('User updated successfully');
+      })
+
+      let user = await User.findOne({ username })
+      res.status(200).json(user);
+
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'Internal server error !' })
+    }
+
+  },
+
   /**================ Update current user password ==================== */
   async updateUserPassword(req, res) {
     try {

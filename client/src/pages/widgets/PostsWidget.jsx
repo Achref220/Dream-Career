@@ -132,7 +132,7 @@ const PostsWidget = ({ username, isProfile = false }) => {
             location={location}
             caption={caption}
             postImageUrls={postImageUrls}
-            userProfilePhoto={userProfilePhoto}
+            userProfilePhoto={userProfilePhoto[0]?.url ? userProfilePhoto[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
             likes={likes}
             commentCount={commentCount}
             createdAt={createdAt}

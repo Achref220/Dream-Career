@@ -8,9 +8,11 @@ module.exports = {
       const { username, caption } = body;
       const {
         location,
-        profilePhotoUrl: userProfilePhoto,
+        profilePhotoUrl,
         _id,
       } = await User.findOne({ username });
+
+      console.log(profilePhotoUrl);
 
       if (!_id) {
         return res.status(404).json({ message: "User not found" });
@@ -19,6 +21,7 @@ module.exports = {
       const fileArr =
         files.map((obj) => ({ url: obj["path"], filename: obj["filename"] })) ||
         undefined;
+      let userProfilePhoto = profilePhotoUrl
 
       await Post.create({
         userId: _id,
@@ -34,6 +37,7 @@ module.exports = {
       const posts = await Post.find().limit(3).sort({ createdAt: -1 });
       return res.status(201).json(posts);
     } catch (err) {
+      console.log("err", err);
       res.status(409).json({ message: err.message });
     }
   },

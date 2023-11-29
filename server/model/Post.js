@@ -33,9 +33,7 @@ const postSchema = new Schema(
       minlength: 1,
     },
     postImageUrls: [ImageSchema],
-    userProfilePhoto: {
-      type: String,
-    },
+    userProfilePhoto: [ImageSchema] | String,
     likes: {
       type: Map,
       of: Boolean,

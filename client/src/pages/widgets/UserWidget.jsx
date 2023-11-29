@@ -72,7 +72,7 @@ const UserWidget = ({ username, profilePhotoUrl }) => {
     <WidgetWrapper style={{backgroundColor : light, color: "#ffff"}}>
       <FlexBetween gap="0.5rem" pb="1.1rem">
         <FlexBetween>
-          <UserAvatar image={profilePhotoUrl} />
+          <UserAvatar image={profilePhotoUrl[0]?.url ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} />
           <Box marginLeft="1rem">
             <Typography
               variant="h4"

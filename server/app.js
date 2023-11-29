@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Enable CORS for all routes in production
-if (process.env.NODE_ENV === "production") {
+
   app.use(
     cors({
       origin: "*",
@@ -61,9 +61,7 @@ if (process.env.NODE_ENV === "production") {
       credentials: true,
     })
   );
-} else {
-  app.use(cors());
-}
+
 // app.use(morgan("common"));
 
 //To ensure that all incoming user input is properly sanitized

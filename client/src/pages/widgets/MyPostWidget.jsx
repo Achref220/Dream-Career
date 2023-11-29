@@ -31,6 +31,7 @@ import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper
 import { SERVER_URL } from "../../service/config";
 
 import { postSchema } from "../../utils/Schemas";
+import {ToastContainer, toast} from "react-toastify";
 
 const MyPostWidget = ({ profilePhotoUrl }) => {
   const dispatch = useDispatch();
@@ -88,7 +89,9 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
     setImageUrls([]);
     setImage(null);
     setPost("");
+    toast.success("Post added")
     } catch (err) {
+      toast.success("Something went wrong, please try again later !")
       setLoading(false);
       console.log(err);
     }
@@ -141,10 +144,11 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
 
   return (
     <WidgetWrapper m="0 0 2rem 0" sx={{ textAlign: "center" }}>
+      <ToastContainer />
       <FlexBetween gap="1.5rem">
-        <UserAvatar image={profilePhotoUrl} />
+        <UserAvatar image={(profilePhotoUrl.length > 0) ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} />
         <InputBase
-          placeholder="What's on your mind?....."
+          placeholder="What's on your mind?.."
           onChange={handleChange}
           onBlur={handleBlur}
           value={post}

@@ -1,7 +1,16 @@
 const {Schema,model } = require('mongoose');
 
 
+const ImageSchema = new Schema({
+    url: String,
+    filename: String,
+  });
+  
+ImageSchema.virtual("thumbnail").get(function () {
+    return this.url.replace("/upload", "/upload/w_200");
+});
 
+  
 const commentSchema  = new Schema({
     postId: {
         type: String,
@@ -15,7 +24,7 @@ const commentSchema  = new Schema({
         type: String,
         required: true
     },
-    userProfilePhoto: String,
+    userProfilePhoto: [ImageSchema] | String,
     commentBody :{
         type : String,
         trim: true,

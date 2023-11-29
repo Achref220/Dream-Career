@@ -24,6 +24,7 @@ module.exports = {
 
       res.status(201).json({ token, newUser });
     } catch (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     }
   },

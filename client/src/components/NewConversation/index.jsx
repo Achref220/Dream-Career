@@ -155,7 +155,7 @@ const NewConversation = ({ isOpen, handleClose }) => {
                 <Box
                   sx={{ width: "100%", display: "flex", alignItems: "center" }}
                 >
-                  <UserAvatar image={option.profilePhotoUrl} size="35px" />
+                  <UserAvatar image={option.profilePhotoUrl[0]?.url ? option.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="35px" />
 
                   <Box margin="0 0.5rem">
                     <Typography variant="h5" fontWeight="500">

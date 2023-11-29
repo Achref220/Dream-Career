@@ -148,7 +148,7 @@ const CommentBox = ({ postId, commentCount, isNonMobileScreens }) => {
           borderRadius: isNonMobileScreens ? "2rem" : "1.5rem",
         }}
       >
-        <UserAvatar image={profilePhotoUrl} size="32px" />
+        <UserAvatar image={(profilePhotoUrl?.length > 0) ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="32px" />
 
         <FlexBetween
           sx={{

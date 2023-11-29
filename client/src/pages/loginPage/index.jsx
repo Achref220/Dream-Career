@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  Container,
   TextField,
   Typography,
   useMediaQuery,
@@ -18,6 +17,7 @@ import { setLogin, setPerson } from "../../state";
 
 import { SERVER_URL } from "../../service/config";
 import { loginSchema, registerSchema } from "../../utils/Schemas";
+import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper";
 
 const initialValuesRegister = {
   username: "",
@@ -163,7 +163,8 @@ const Form = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '150px', backgroundColor: '#ffff', borderRadius: "7px" }}> 
+    <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}} >
+       <WidgetWrapper width={"500px"} > 
       <ToastContainer />
       <Typography
         fontWeight="bold"
@@ -179,7 +180,7 @@ const Form = () => {
           },
         }}
       >
-        Dream Career
+        DREACA
       </Typography>
 
       <Formik
@@ -323,7 +324,9 @@ const Form = () => {
           </form>
         )}
       </Formik>
-    </Container>
+    </WidgetWrapper>
+    </div>
+   
   );
 };
 

@@ -46,7 +46,7 @@ const SingleComment = ({ comment, onLikeClick }) => {
         width: "100%",
       }}
     >
-      <UserAvatar image={userProfilePhoto} size="32px" />
+      <UserAvatar image={userProfilePhoto[0]?.url ? userProfilePhoto[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="32px" />
 
       <Box
         sx={{

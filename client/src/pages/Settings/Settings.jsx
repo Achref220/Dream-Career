@@ -2,9 +2,9 @@ import {
   Box,
   Button,
   CircularProgress,
-  IconButton,
   Input,
   TextField,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -12,26 +12,30 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar";
 import UserAvatar from "../../components/CustomStyledComponents/UserAvatar";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SERVER_URL } from "../../service/config";
 import { Formik } from "formik";
 import { useTheme } from "@emotion/react";
 import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper";
 import { ToastContainer, toast } from "react-toastify";
 import { updatePasswordSchema } from "../../utils/Schemas";
-import {PhotoCamera} from "@mui/icons-material";
+import { setUpdateUser } from "../../state";
 
 const Settings = () => {
   const [user, setUser] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
   const [isSignedInUserprofile, setIsSignedInUserprofile] = useState(false);
   const { username: signedInUsername } = useSelector((state) => state.user);
-  const { username } = useParams();
+  const { usern } = useParams();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const token = useSelector((state) => state.token);
   const navigate = useNavigate();
   const { palette } = useTheme();
+  const dispatch = useDispatch();
+  const [ loadingUpdateUser, setLoadingUpdateUser ] = useState(false)
+
   const getUser = async () => {
-    const targetUsername = username || signedInUsername;
+    const targetUsername = usern || signedInUsername;
 
     const response = await fetch(SERVER_URL + `u/${targetUsername}`, {
       method: "GET",
@@ -42,9 +46,13 @@ const Settings = () => {
 
     if (response.ok) {
       const userData = await response.json();
-      console.log(userData);
       setIsSignedInUserprofile(userData.username === signedInUsername);
       setUser(userData);
+      dispatch(setUpdateUser({ user: userData }));
+      setUsername(userData.username);
+      setLocation(userData.location);
+      setEmail(userData.email);
+      setOccupation(userData.occupation);
     } else {
       navigate("/");
     }
@@ -64,6 +72,27 @@ const Settings = () => {
     occupation: user ? user.occupation : null,
   };
 
+  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
+  const [occupation, setOccupation] = useState("");
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleOccupationChange = (e) => {
+    setOccupation(e.target.value);
+  };
+
   const initialValuesPassword = {
     currentPassword: "",
     newPassword: "",
@@ -71,26 +100,34 @@ const Settings = () => {
   };
 
   const [loadingUpdatePass, setLoadingUpdatePass] = useState(false);
-
-  const handleUserInfoFormSubmit = async (values, { setSubmitting }) => {
-    const updateUserProfileInfoUrl = `u/${signedInUsername}/updateUserInfo`;
+  const handleUserInfoFormSubmit = async (e) => {
+    setLoadingUpdateUser(true)
+    const formData = new FormData();
+    if (selectedFile) {
+      formData.append("profilePhotoUrl", selectedFile);
+    }
+    formData.append("username", username);
+    formData.append("location", location);
+    formData.append("email", email);
+    formData.append("occupation", occupation);
+    const updateUserProfileInfoUrl =
+      SERVER_URL + `u/${signedInUsername}/updateUserInfo`;
     try {
       const response = await fetch(updateUserProfileInfoUrl, {
         method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          profilePhotoUrl: values.profilePhotoUrl,
-          username: values.username,
-          location: values.location,
-          email: values.email,
-          occupation: values.occupation,
-        }),
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
       });
-      return response;
+      if (response.ok) {
+        await getUser();
+        toast.success("Profile settings updated");
+        setLoadingUpdateUser(false)
+      } else {
+        toast.error("Something went wrong, please try again later !");
+        setLoadingUpdateUser(false)
+      }
     } catch (err) {
+      setLoadingUpdateUser(false)
       console.log(err);
     }
   };
@@ -129,12 +166,9 @@ const Settings = () => {
     setSubmitting(false);
   };
 
-  const [selectedFile, setSelectedFile] = useState(null);
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-    // Additional handling logic if needed
   };
 
   return (
@@ -175,7 +209,6 @@ const Settings = () => {
               onSubmit={handleUserInfoFormSubmit}
             >
               {({
-                values,
                 errors,
                 touched,
                 handleBlur,
@@ -195,7 +228,21 @@ const Settings = () => {
                       },
                     }}
                   >
-                    <UserAvatar image={selectedFile ? URL.createObjectURL(selectedFile) : null || user.profilePhotoUrl} />
+                    <Tooltip title="Change your avatar" arrow>
+                      <label
+                        htmlFor="image-upload"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <UserAvatar
+                          image={
+                            selectedFile
+                              ? URL.createObjectURL(selectedFile)
+                              : user.profilePhotoUrl[0]?.url ||
+                                "../../assets/addimg.png"
+                          }
+                        />
+                      </label>
+                    </Tooltip>
                     <Input
                       accept="image/*"
                       id="image-upload"
@@ -206,18 +253,14 @@ const Settings = () => {
                       }}
                       style={{ display: "none" }}
                     />
-                    <label htmlFor="image-upload">
-                      <IconButton color="primary" component="span">
-                        <PhotoCamera />
-                      </IconButton>
-                    </label>
                     <TextField
+                      disabled
                       label="Username"
                       onBlur={handleBlur}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleUsernameChange(e);
                       }}
-                      value={values.username}
+                      value={username}
                       name="username"
                       error={
                         Boolean(touched.username) && Boolean(errors.username)
@@ -230,9 +273,9 @@ const Settings = () => {
                       label="Location"
                       onBlur={handleBlur}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleLocationChange(e);
                       }}
-                      value={values.location}
+                      value={location}
                       name="location"
                       error={
                         Boolean(touched.location) && Boolean(errors.location)
@@ -246,9 +289,9 @@ const Settings = () => {
                       label="Email"
                       onBlur={handleBlur}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleEmailChange(e);
                       }}
-                      value={values.email}
+                      value={email}
                       name="email"
                       error={Boolean(touched.email) && Boolean(errors.email)}
                       helperText={touched.email && errors.email}
@@ -259,9 +302,9 @@ const Settings = () => {
                       label="Occupation"
                       onBlur={handleBlur}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleOccupationChange(e);
                       }}
-                      value={values.occupation}
+                      value={occupation}
                       name="occupation"
                       error={
                         Boolean(touched.occupation) &&
@@ -283,7 +326,16 @@ const Settings = () => {
                         "&:hover": { color: palette.primary.main },
                       }}
                     >
-                      Save
+                       {loadingUpdateUser ? (
+                        <CircularProgress
+                          sx={{
+                            color: palette.neutral.dark,
+                          }}
+                          size={22}
+                        />
+                      ) : (
+                        "Save"
+                      )}
                     </Button>
                   </Box>
                 </form>
@@ -328,7 +380,7 @@ const Settings = () => {
                       width={"100%"}
                       fontWeight="bold"
                       textAlign="center"
-                      fontSize="17px"
+                      fontSize="15px"
                       sx={{
                         "&:hover": {
                           color: "grey",

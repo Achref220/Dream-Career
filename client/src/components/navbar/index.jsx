@@ -5,6 +5,7 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Tooltip,
 } from "@mui/material";
 
 import {
@@ -15,6 +16,7 @@ import {
   Help,
   Menu,
   Close,
+  Leaderboard,
 } from "@mui/icons-material";
 
 import SearchBar from "../SearchBar";
@@ -78,7 +80,7 @@ const Navbar = () => {
               },
             }}
           >
-            ream Career
+            REACA
           </Typography>
         </div>
           {isNonMobileScreens && <SearchBar />}
@@ -102,11 +104,22 @@ const Navbar = () => {
                 <Textsms sx={{ fontSize: "25px", color: "#FFFF" }} />
               )}
             </IconButton>
+            
+            <Tooltip title="Club Leaderboard" arrow>
+            <IconButton>
+              {theme.palette.mode === "dark" ? (
+                <Leaderboard sx={{ fontSize: "25px" }} />
+              ) : (
+                <Leaderboard sx={{ fontSize: "25px", color: "#FFFF" }} />
+              )}
+            </IconButton>
+            </Tooltip>
+            
             <Notifications sx={{ fontSize: "25px" , color : "#FFFF"}} />
             <Help sx={{ fontSize: "25px" , color: "#FFFF"}} />
             <AccountMenu
               username={username}
-              profilePhotoUrl={profilePhotoUrl}
+              profilePhotoUrl={profilePhotoUrl[0]?.url ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
             />
           </FlexBetween>
         ) : (

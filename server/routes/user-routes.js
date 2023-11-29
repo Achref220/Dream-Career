@@ -6,8 +6,13 @@ const {
     ,getUserFollowings
     ,addRemoveFollow
     ,getUsers,
-    updateUserPassword
+    updateUserPassword,
+    updateUserProfile
 } = require('../controllers/user-controller');
+
+const multer = require("multer");
+const { storage } = require("../config/cloudinary");
+const upload = multer({ storage });
 
 /**=========== post controller to get a user's posts ============== */
 const { getUserPosts } = require('../controllers/post-controller')
@@ -21,6 +26,7 @@ const { authMiddleware } = require('../middleware/jwt-config');
     router.get('/:usernameorid',authMiddleware, getUser); //get a single user
     router.get('/:username/posts', authMiddleware, getUserPosts) // get a user's posts
     router.route('/:userId/update-password').put(authMiddleware, updateUserPassword) //update current user password
+    router.route('/:userId/updateUserInfo').put(authMiddleware, upload.array("profilePhotoUrl", 5), updateUserProfile) // update current user profile
 
     router
         .route('/:userId/followings')

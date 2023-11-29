@@ -1,6 +1,16 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200");
+});
+
 const userSchema = new Schema(
   {
     username: {
@@ -9,7 +19,7 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
       maxLength: 50,
-      minlength: [8, "Username must be at least 8 characters long"],
+      minlength: [4, "Username must be at least 4 characters long"],
       match: [
         /^[a-zA-Z0-9!\(\)\-\.\?\[\]\_\`\~\;\:\!\@\#\$\%\^\&\*\+\=]+$/,
         "Username can only contain letters, numbers, and the following special characters: !()-.[]_`~;:!@#$%^&*+=",
@@ -38,14 +48,7 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
-    profilePhotoUrl: {
-      type: String,
-      match: [
-        /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w, \.-]*)*\/?(?:\.png)?$/,
-        "Link is invalid",
-      ],
-      default: "https://i.stack.imgur.com/l60Hf.png",
-    },
+    profilePhotoUrl: [ImageSchema],
     location: {
       type: String,
       trim: true,
