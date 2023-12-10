@@ -312,14 +312,14 @@ const DirectMessagePage = ({ isModal = false }) => {
                           variant="dot"
                         >
                           <UserAvatar
-                            image={currentConvo.profilePhotoUrl[0]?.url ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
+                            image={(currentConvo && currentConvo.profilePhotoUrl[0]?.url) ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
                             size="35px"
                           />
                         </StyledBadge>
                       </Stack>
                     ) : (
                       <UserAvatar
-                        image={currentConvo.profilePhotoUrl[0]?.url ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
+                        image={(currentConvo && currentConvo.profilePhotoUrl[0]?.url) ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
                         size="35px"
                       />
                     )}

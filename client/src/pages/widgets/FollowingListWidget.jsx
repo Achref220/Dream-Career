@@ -101,7 +101,7 @@ const FollowingListWidget = ({ username , isProfile=false }) => {
                       followingId={_id}
                       name={username}
                       subtitle={occupation}
-                      userProfilePhotoUrl={profilePhotoUrl[0]?.url || 'https://i.stack.imgur.com/l60Hf.png'}
+                      userProfilePhotoUrl={profilePhotoUrl.length > 0 ? profilePhotoUrl[0]?.url : 'https://i.stack.imgur.com/l60Hf.png'}
                     />
                 ))}
 

@@ -1,0 +1,31 @@
+.login-bg {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    background-color: #14b3c1;
+}
+.MjLogo {
+    position: relative;
+    top: 10px;
+}
+.drtype {
+    position: relative;
+    top: 70px;
+}
+.wdwrapper {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 999;
+}
+.login-btn {
+    bottom: 32px;
+    background-color: #ffff;
+    border-bottom-right-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
