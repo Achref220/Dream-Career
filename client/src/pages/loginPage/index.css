@@ -18,7 +18,13 @@
 .wdwrapper {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     z-index: 999;
+    text-align: center
 }
+.wdwrapper img {
+    max-width: 100% !important; 
+    height: auto !important;
+    display: inline-block !important;
+  }
 .login-btn {
     bottom: 32px;
     background-color: #ffff;

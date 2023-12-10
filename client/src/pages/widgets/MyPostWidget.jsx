@@ -145,7 +145,7 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
       <FlexBetween gap="1.5rem">
         <UserAvatar image={(profilePhotoUrl.length > 0) ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} />
         <InputBase
-          placeholder="What's on your mind?.."
+          placeholder="What's on your mind ?"
           onChange={handleChange}
           onBlur={handleBlur}
           value={post}

@@ -165,25 +165,6 @@ const Form = () => {
 
   return (
     <div className="login-bg">
-      {/* <Box sx={{display: "flex"}} className="MjLogo">
-      <img onClick={() => navigate("/")} width={"300px"} src="/assets/logo png.png" alt="rt" />
-      <Typography
-        className="drtype"
-        textAlign="center"
-        paddingTop="1rem"
-        fontSize="90px"
-        color="#ffff"
-        onClick={() => navigate("/")}
-        sx={{
-          "&:hover": {
-            color: "#ffff",
-            cursor: "pointer",
-          },
-        }}
-      >
-        Dreaca
-      </Typography>
-      </Box> */}
       <Box
         sx={{
           display: "flex",
@@ -193,6 +174,7 @@ const Form = () => {
         }}
       >
         <WidgetWrapper width={isNonMobile ? "500px" : "370px"} sx={{ borderRadius: "50px" }} className="wdwrapper">
+        <img onClick={() => navigate("/")} width={"200px"} className="logoimg" src="/assets/image_1.png" alt="logo" />
           <ToastContainer />
 
           <Formik
@@ -296,6 +278,7 @@ const Form = () => {
                 {/* BUTTONS */}
                 <Box padding="0 1.5rem 1.5rem 1.5rem">
                   <Typography
+                  textAlign={'start'}
                     onClick={() => {
                       setPageType(isLogin ? "register" : "login");
                       navigate(isLogin ? "/register" : "/login");

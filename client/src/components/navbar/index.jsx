@@ -69,7 +69,7 @@ const Navbar = () => {
         <div style={{display: "flex"}}>
         <img onClick={() => navigate("/")} width={"50px"} src="/assets/logo png.png" alt="rt" />
           <Typography
-            fontWeight="bold"
+            
             fontSize="clamp(1rem, 2rem, 2.25rem)"
             color="#ffff"
             onClick={() => navigate("/")}
@@ -80,7 +80,7 @@ const Navbar = () => {
               },
             }}
           >
-            REACA
+            Dreaca
           </Typography>
         </div>
           {isNonMobileScreens && <SearchBar />}

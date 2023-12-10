@@ -1,4 +1,4 @@
-import { Inbox, Info, Telegram } from "@mui/icons-material";
+import { AddComment, Inbox, Info, Telegram } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
@@ -6,6 +6,7 @@ import {
   IconButton,
   InputBase,
   Stack,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -260,14 +261,19 @@ const DirectMessagePage = ({ isModal = false }) => {
               >
                 {username}
               </Typography>
-
-              <IconButton onClick={handleNewConversation}>
-                {palette.mode === "dark" ? (
-                  <Inbox sx={{ fontSize: "25px" }} />
-                ) : (
-                  <Inbox sx={{ fontSize: "25px", color: dark }} />
-                )}
-              </IconButton>
+              <Tooltip title="Add new contact to chat with" arrow>
+                <AddComment
+                  fontSize="large"
+                  style={{ cursor: "pointer" }}
+                  onClick={handleNewConversation}
+                >
+                  {palette.mode === "dark" ? (
+                    <Inbox sx={{ fontSize: "25px" }} />
+                  ) : (
+                    <Inbox sx={{ fontSize: "25px", color: dark }} />
+                  )}
+                </AddComment>
+              </Tooltip>
             </Box>
 
             {/* Conversation list */}
@@ -312,14 +318,23 @@ const DirectMessagePage = ({ isModal = false }) => {
                           variant="dot"
                         >
                           <UserAvatar
-                            image={(currentConvo && currentConvo.profilePhotoUrl[0]?.url) ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
+                            image={
+                              currentConvo &&
+                              currentConvo.profilePhotoUrl[0]?.url
+                                ? currentConvo.profilePhotoUrl[0].url
+                                : "https://i.stack.imgur.com/l60Hf.png"
+                            }
                             size="35px"
                           />
                         </StyledBadge>
                       </Stack>
                     ) : (
                       <UserAvatar
-                        image={(currentConvo && currentConvo.profilePhotoUrl[0]?.url) ? currentConvo.profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'}
+                        image={
+                          currentConvo && currentConvo.profilePhotoUrl[0]?.url
+                            ? currentConvo.profilePhotoUrl[0].url
+                            : "https://i.stack.imgur.com/l60Hf.png"
+                        }
                         size="35px"
                       />
                     )}

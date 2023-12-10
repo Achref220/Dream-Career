@@ -17,7 +17,7 @@ const UserAvatar = ({ image, size = "60px", isLoading }) => {
   return (
     <Box width={size} height={size}>
       <img
-        style={{ objectFit: "cover", borderRadius: "50%" }}
+        style={{ objectFit: "cover", borderRadius: "50%", border: "solid blue", borderColor: "#14b3c1"}}
         width={size}
         height={size}
         src={image}

@@ -6,10 +6,10 @@ import { setPost } from "../../state";
 import { fToNow } from "../../utils/formatDate";
 
 import {
+  BookmarkBorder,
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
 } from "@mui/icons-material";
 
 import {
@@ -205,7 +205,7 @@ const SinglePostWidget = ({
         </FlexBetween>
 
         <IconButton>
-          <ShareOutlined />
+          <BookmarkBorder />
         </IconButton>
       </FlexBetween>
 
