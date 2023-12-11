@@ -5,6 +5,7 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FollowingListWidget from "../widgets/FollowingListWidget";
 import AdWidget from "../widgets/AdWidget";
+import Suggestions from "../widgets/Suggestions";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
@@ -21,6 +22,11 @@ const HomePage = () => {
         gap="0.5rem"
         justifyContent="space-around"
       >
+        <Box>
+        {isNonMobileScreens && (
+          <Suggestions username={username} />
+        )}
+        </Box>
         <Box
           flexBasis={isNonMobileScreens ? "50%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}

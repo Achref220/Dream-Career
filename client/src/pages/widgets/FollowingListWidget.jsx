@@ -1,116 +1,121 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import Following from "../../components/Following";
 
 import FollowingListSkeleton from "../../components/Skeletons/FollowingListSkeleton";
 import { useState } from "react";
 
-
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setFollowing, setFollowers, setPersonFollowing, setPersonFollowers } from "../../state";
+import {
+  setFollowing,
+  setFollowers,
+  setPersonFollowing,
+  setPersonFollowers,
+} from "../../state";
 
 import { SERVER_URL } from "../../service/config";
 
-const FollowingListWidget = ({ username , isProfile=false }) => {
-    const dispatch = useDispatch();
-    const { palette } = useTheme();
+const FollowingListWidget = ({ username, isProfile = false }) => {
+  const dispatch = useDispatch();
+  const { palette } = useTheme();
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const token = useSelector((state) => state.token);
-    const signedInUsername = useSelector((state) => state.user.username)
-    const followings = useSelector((state) => state.user.followings);
+  const token = useSelector((state) => state.token);
+  const signedInUsername = useSelector((state) => state.user.username);
+  const followings = useSelector((state) => state.user.followings);
+
+  const isSignedInUserProfile = signedInUsername === username;
 
 
-  const isSignedInUserProfile = signedInUsername === username
-
+  useEffect(() => {
     const getFollowings = async () => {
-        const response = await fetch(
-             SERVER_URL + `u/${username}/followings`,
-            {
-                method: "GET",
-                headers: { Authorization: `Bearer ${token}`}
-            }
-        );
+      try {
+        const response = await fetch(SERVER_URL + `u/${username}/followings`, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch followings");
+        }
+
         const data = await response.json();
-        setIsLoading(false)
-        if(isSignedInUserProfile){
+
+        if (isSignedInUserProfile) {
           dispatch(setFollowing({ followings: data }));
-        } else{
+        } else {
           dispatch(setPersonFollowing({ followings: data }));
         }
-    }
 
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching followings:", error);
+        setIsLoading(false);
+      }
+    };
     const getFollowers = async () => {
-            const response = await fetch(
-              SERVER_URL + `u/${username}/followers`,
-            {
-                method: "GET",
-                headers: { Authorization: `Bearer ${token}`}
-            }
-        );
-        const data = await response.json();
-        setIsLoading(false)
+      const response = await fetch(SERVER_URL + `u/${username}/followers`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      setIsLoading(false);
 
-        if(isSignedInUserProfile){
-          dispatch(setFollowers({ followers: data }));
-        } else{
-          dispatch(setPersonFollowers({ followers: data}));
-        }
-    }
+      if (isSignedInUserProfile) {
+        dispatch(setFollowers({ followers: data }));
+      } else {
+        dispatch(setPersonFollowers({ followers: data }));
+      }
+    };
 
-    useEffect(() => {
-        getFollowings();
-        getFollowers();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    getFollowings();
+    getFollowers();
+  }, [username, token, isSignedInUserProfile, dispatch, setIsLoading]);
 
-    if(isLoading){
-        return (
-          <FollowingListSkeleton/>
-        )
-    }
-
- if(isSignedInUserProfile){
-  if(followings.length){
-    return (
-        <WidgetWrapper>
-            <Typography
-              color={palette.neutral.dark}
-              variant="h5"
-              fontWeight="500"
-              sx={{ mb: "1.5rem" }}
-            >
-               People you follow
-            </Typography>
-
-            <Box display="flex" flexDirection="column" gap="1.5rem">
-                {followings.map(({ 
-                 _id, 
-                 username,
-                 occupation,
-                 profilePhotoUrl,
-                }) => (
-                    <Following
-                      isProfile={true}
-                      key={uuidv4()}
-                      followingId={_id}
-                      name={username}
-                      subtitle={occupation}
-                      userProfilePhotoUrl={profilePhotoUrl.length > 0 ? profilePhotoUrl[0]?.url : 'https://i.stack.imgur.com/l60Hf.png'}
-                    />
-                ))}
-
-            </Box>
-        </WidgetWrapper>
-    )
+  if (isLoading) {
+    return <FollowingListSkeleton />;
   }
- }
-    
-}
 
-export default FollowingListWidget
+  if (isSignedInUserProfile) {
+    if (followings.length) {
+      return (
+        <WidgetWrapper>
+          <Typography
+            color={palette.neutral.dark}
+            variant="h5"
+            fontWeight="500"
+            sx={{ mb: "1.5rem" }}
+          >
+            People you follow
+          </Typography>
+
+          <Box display="flex" flexDirection="column" gap="1.5rem">
+            {followings.map(
+              ({ _id, username, occupation, profilePhotoUrl }) => (
+                <Following
+                  isProfile={true}
+                  key={uuidv4()}
+                  followingId={_id}
+                  name={username}
+                  subtitle={occupation}
+                  userProfilePhotoUrl={
+                    profilePhotoUrl.length > 0
+                      ? profilePhotoUrl[0]?.url
+                      : "https://i.stack.imgur.com/l60Hf.png"
+                  }
+                />
+              )
+            )}
+          </Box>
+        </WidgetWrapper>
+      );
+    }
+  }
+};
+
+export default FollowingListWidget;

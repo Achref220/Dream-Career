@@ -71,6 +71,58 @@ module.exports = {
     }
   },
 
+
+
+  async getUserSuggestions({ params, query }, res) {
+    try {
+        const { userId: usernameorid } = params;
+        const { page = 1, pageSize = 6 } = query;
+
+        const skip = (page - 1) * pageSize;
+
+        let usersQuery;
+        const isValidObjectId = mongoose.isValidObjectId(usernameorid);
+        if (isValidObjectId) {
+            const currentUser = await User.findById(usernameorid);
+            usersQuery = User.aggregate([
+                { $match: { _id: { $nin: currentUser.followings, $ne: mongoose.Types.ObjectId(usernameorid) } } },
+                { $sample: { size: pageSize * 2 } }
+            ]);
+        } else {
+            const currentUser = await User.findOne({ username: usernameorid });
+            if (!currentUser) {
+                throw new Error("User not found");
+            }
+            usersQuery = User.aggregate([
+                { $match: { _id: { $nin: currentUser.followings, $ne: currentUser._id } } },
+                { $sample: { size: pageSize * 2 } }
+            ]);
+        }
+
+        const users = await usersQuery.exec();
+        const randomizedUsers = users.sort(() => Math.random() - 0.5);
+        const selectedUsers = randomizedUsers.slice(skip, skip + pageSize);
+
+        const formattedUsers = selectedUsers.map(({ _id, username, email, occupation, location, profilePhotoUrl }) => {
+            return {
+                _id,
+                username,
+                email,
+                occupation,
+                location,
+                profilePhotoUrl,
+            };
+        });
+
+        res.status(200).json({ users: formattedUsers, hasNextPage: formattedUsers.length == pageSize });
+    } catch (err) {
+        console.error(err);
+        res.status(404).json({ message: err.message });
+    }
+  },
+
+
+  
   /**================ GET User Followings ==================== */
   async getUserFollowings({ params }, res) {
     try {

@@ -4,9 +4,10 @@ import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper
 import InfoIcon from "@mui/icons-material/Info";
 
 const ad = {
-  url: "https://i.pinimg.com/736x/d6/3d/5f/d63d5f27d6e46a6918a26f36a5f31c0f.jpg",
-  name: "Nike",
-  text: "From the field to the streets, we've got you covered.",
+  url: "/assets/image_1.png",
+  name: "{clubName}",
+  points: "{clubPoints}",
+  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
 };
 
 const AdWidget = () => {
@@ -17,10 +18,9 @@ const AdWidget = () => {
     <WidgetWrapper>
       <FlexBetween>
         <Typography color={dark} variant="h5" fontWeight="500">
-          Sponsored
+          Post of the week
         </Typography>
         <FlexBetween>
-          <Typography color={medium}>Create Ad</Typography>
           <IconButton>
             <InfoIcon />
           </IconButton>
@@ -38,7 +38,7 @@ const AdWidget = () => {
       />
       <FlexBetween>
         <Typography color={main}>{ad.name}</Typography>
-        <Typography color={medium}>{ad.name}.com</Typography>
+        <Typography color={medium}>{ad.points}</Typography>
       </FlexBetween>
       <Typography color={medium} m="0.5rem 0">
         {ad.text}

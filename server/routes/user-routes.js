@@ -7,7 +7,8 @@ const {
     ,addRemoveFollow
     ,getUsers,
     updateUserPassword,
-    updateUserProfile
+    updateUserProfile,
+    getUserSuggestions
 } = require('../controllers/user-controller');
 
 const multer = require("multer");
@@ -36,6 +37,10 @@ const { authMiddleware } = require('../middleware/jwt-config');
     router
         .route('/:userId/followers')
         .get(authMiddleware,getUserFollowers) //To get a user's follower list by username or id
+
+    router
+        .route('/:userId/suggestions')
+        .get(authMiddleware,getUserSuggestions) //To get a user's follower list by username or id
 
 
 /**
