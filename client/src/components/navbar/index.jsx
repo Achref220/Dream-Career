@@ -106,7 +106,7 @@ const Navbar = () => {
             </IconButton>
             
             <Tooltip title="Club Leaderboard" arrow>
-            <IconButton>
+            <IconButton onClick={() => navigate("/leaderboard")}>
               {theme.palette.mode === "dark" ? (
                 <Leaderboard sx={{ fontSize: "25px" }} />
               ) : (

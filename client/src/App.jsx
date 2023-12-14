@@ -27,6 +27,7 @@ import { setLogout } from './state'
 
 import useTokenExpiration from './utils/checkToken'
 import Settings from './pages/Settings/Settings'
+import Leaderboard from './pages/Leaderboard/index'
 
 
 const App = () => { 
@@ -67,6 +68,10 @@ const App = () => {
 
             <Route path="/settings">
                 <Route path='/settings'  element={isLoggedIn ? <Settings /> : <Navigate to="/login" />} />
+            </Route>
+
+            <Route path="/leaderboard">
+                <Route path='/leaderboard'  element={isLoggedIn ? <Leaderboard /> : <Navigate to="/leaderboard" />} />
             </Route>
 
             <Route
