@@ -18,6 +18,8 @@ import { setLogin, setPerson } from "../../state";
 import { SERVER_URL } from "../../service/config";
 import { loginSchema, registerSchema } from "../../utils/Schemas";
 import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper";
+import { keyframes } from "@emotion/react";
+
 import "./index.css";
 
 const initialValuesRegister = {
@@ -32,6 +34,48 @@ const initialValuesLogin = {
   username: "",
   password: "",
 };
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const slideFromRight = keyframes`
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+const slideFromLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+const slideFromBottom = keyframes`
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 const Form = () => {
   const location = useLocation().pathname.slice(1);
@@ -164,17 +208,40 @@ const Form = () => {
   };
 
   return (
-    <div className="login-bg">
+    <div
+      className="login-bg"
+      style={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "row",
+      }}
+    >
       <Box
         sx={{
+          width: isNonMobile ? "50%" : "100%",
+          height: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          backgroundColor: "#14b3c1",
         }}
       >
-        <WidgetWrapper width={isNonMobile ? "500px" : "370px"} sx={{ borderRadius: "50px" }} className="wdwrapper">
-        <img onClick={() => navigate("/")} width={"200px"} className="logoimg" src="/assets/image_1.png" alt="logo" />
+        <WidgetWrapper
+          width={isNonMobile ? "500px" : "370px"}
+          sx={{ borderRadius: "50px", animation: `${slideFromLeft} 1s ease-in-out` }}
+          className="wdwrapper"
+        >
+          {!isNonMobile ? (
+            <img
+              onClick={() => navigate("/")}
+              width={"200px"}
+              className="logoimg"
+              src="/assets/image_1.png"
+              alt="logo"
+            />
+          ) : null}
           <ToastContainer />
 
           <Formik
@@ -278,7 +345,7 @@ const Form = () => {
                 {/* BUTTONS */}
                 <Box padding="0 1.5rem 1.5rem 1.5rem">
                   <Typography
-                  textAlign={'start'}
+                    textAlign={"start"}
                     onClick={() => {
                       setPageType(isLogin ? "register" : "login");
                       navigate(isLogin ? "/register" : "/login");
@@ -303,20 +370,21 @@ const Form = () => {
           </Formik>
         </WidgetWrapper>
         <Button
-          form="authForm"
-          className="login-btn"
-          type="submit"
-          disabled={loading}
-          sx={{
-            width: isNonMobile ? "350px" : "250px",
-            m: "2rem 0",
-            p: "0.8rem",
-            backgroundColor: "#ffff",
-            color: "#14b3c1",
-            fontSize: "17px",
-            "&:hover": { color: "#14b3c1", backgroundColor: "#ffff" },
-          }}
-        >
+            form="authForm"
+            className="login-btn"
+            type="submit"
+            disabled={loading}
+            sx={{
+              width: isNonMobile ? "350px" : "250px",
+              m: "2rem 0",
+              p: "0.8rem",
+              backgroundColor: "#ffff",
+              color: "#14b3c1",
+              fontSize: "17px",
+              animation: `${slideFromBottom} 1s ease-in-out`, // Apply the animation
+              "&:hover": { color: "#14b3c1", backgroundColor: "#ffff" },
+            }}
+          >
           {loading ? (
             <CircularProgress
               sx={{
@@ -330,7 +398,61 @@ const Form = () => {
             "REGISTER"
           )}
         </Button>
+        <Typography
+          textAlign={"end"}
+          sx={{
+            position: "absolute",
+            fontSize: "16px",
+            fontWeight: "bald",
+            bottom: "20px",
+            color: "#ffff",
+            "&:hover": {
+              cursor: "pointer",
+              color: palette.primary.dark,
+            },
+          }}
+        >
+          © 2023-2024 Dreaca. All rights reserved.
+        </Typography>
       </Box>
+      {isNonMobile ? (
+        <Box
+          sx={{
+            width: "50%",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ animation: `${slideFromRight} 1s ease-in-out` }}>
+          <img
+            onClick={() => navigate("/")}
+            width={"600px"}
+            className="logoimg"
+            src="/assets/image_1.png"
+            alt="logo"
+          />
+          </Box>
+          <Typography
+            textAlign={"end"}
+            sx={{
+              position: "absolute",
+              fontSize: "18px",
+              bottom: "20px",
+              color: "#14b3c1",
+              animation: `${fadeIn} 1s ease-in-out`,
+              "&:hover": {
+                cursor: "pointer",
+                color: palette.primary.dark,
+              },
+            }}
+          >
+            Just dream on
+          </Typography>
+          ;
+        </Box>
+      ) : null}
     </div>
   );
 };
