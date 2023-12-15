@@ -450,7 +450,6 @@ const Form = () => {
           >
             Just dream on
           </Typography>
-          ;
         </Box>
       ) : null}
     </div>
