@@ -33,6 +33,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { username, profilePhotoUrl } = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const  mode  = useSelector((state) => state.mode)
+  console.log(mode);
 
   const theme = useTheme();
   const dark = theme.palette.neutral.dark;
@@ -49,21 +51,21 @@ const Navbar = () => {
   };
 
   return (
-    <header
-      style={{
+    <Box
+      sx={{
         width: "100%",
         height: "100%",
         paddingBottom: "5rem",
-        zIndex: "55",
+        zIndex: "999",
         boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.5)",
         backgroundColor: theme.palette.background.light,
-        position: "relative",
+        position: "sticky",
       }}
     >
       <FlexBetween
         padding="1rem 6%"
         backgroundColor={alt}
-        sx={{ position: "fixed", width: "100%" }}
+        sx={{ position: "fixed", width: "100%", backgroundColor: mode === "dark" ? "black" : theme.palette.background.ligh}}
       >
         <FlexBetween gap="1.75rem">
         <div style={{display: "flex"}}>
@@ -180,7 +182,7 @@ const Navbar = () => {
           </Box>
         )}
       </FlexBetween>
-    </header>
+    </Box>
   );
 };
 

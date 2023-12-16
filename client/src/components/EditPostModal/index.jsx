@@ -213,7 +213,7 @@ const EditPostModal = ({ open = false, setOpen, post }) => {
                       margin: "1rem 0 2rem 0",
                     }}
                   >
-                    <UserAvatar image={userProfilePhoto} size="32px" />
+                    <UserAvatar image={(userProfilePhoto.length > 0) ? userProfilePhoto[0].url : 'https://i.stack.imgur.com/l60Hf.png'} size="32px" />
                     {username}
                   </Box>
 

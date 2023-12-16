@@ -30,6 +30,9 @@ import { SERVER_URL } from "../../service/config";
 
 import { useEffect } from "react";
 import { fShortenNumber } from "../../utils/formatNumber";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
 
 const SinglePostWidget = ({
   postId,
@@ -115,6 +118,7 @@ const SinglePostWidget = ({
     <Box
       m="0 0 2rem 0"
       sx={{
+        width: "850px",
         backgroundColor: palette.background.alt,
         borderRadius: "0.75rem",
         padding: isNonMobileScreens
@@ -162,25 +166,51 @@ const SinglePostWidget = ({
       </Box>
 
       {postImageUrls.length ? (
-        <div
-          style={{
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            width: "100%"
           }}
         >
-          <img
-            src={postImageUrls[0].url}
-            alt={postImageUrls[0].filename}
-            style={{
-              borderRadius: isNonMobileScreens ? "0.75rem" : "0",
-              marginTop: "0.75rem",
-              height: imageHeight,
-              width: "100%",
-              objectFit: "cover",
+          {postImageUrls.length > 0 && (
+            <Swiper
+            modules={[Pagination, Navigation]}
+            spaceBetween={40}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            navigation={{
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
             }}
-          />
-        </div>
+          >
+            {postImageUrls.map(({ url, filename }) => (
+              <SwiperSlide key={uuidv4()}>
+                <Box>
+                  <Box sx={{ position: "relative" }}>
+                    <img
+                      src={url}
+                      alt={filename}
+                      style={{
+                        borderRadius: isNonMobileScreens ? "0.75rem" : "0",
+                        marginTop: "0.75rem",
+                        height: imageHeight,
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+    
+            <Box className="swiper-button-prev" style={{color: "#14b3c1"}}></Box>
+            <Box className="swiper-button-next" style={{color: "#14b3c1"}}></Box>
+          </Swiper>
+            
+          )}
+        </Box>
       ) : null}
 
       <FlexBetween mt="0.25rem">

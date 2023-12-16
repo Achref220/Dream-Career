@@ -7,6 +7,7 @@ import SinglePostWidget from "./SinglePostWidget";
 
 import SinglePostSkeleton from "../../components/Skeletons/SinglePostSkeleton";
 import { SERVER_URL } from "../../service/config";
+import {Box} from "@mui/material";
 
 const PostsWidget = ({ username, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -110,7 +111,7 @@ const PostsWidget = ({ username, isProfile = false }) => {
   }
 
   return (
-    <>
+    <Box>
       {posts.map(
         ({
           _id,
@@ -144,7 +145,7 @@ const PostsWidget = ({ username, isProfile = false }) => {
             <SinglePostSkeleton key={uuidv4()} />
           ))
         : null}
-    </>
+    </Box>
   );
 };
 
