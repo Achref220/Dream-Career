@@ -37,7 +37,7 @@ const postSchema = new Schema(
     likes: {
       type: Map,
       of: Boolean,
-      default: {},
+      default: new Map(),
     },
     commentCount: {
       type: Number,
