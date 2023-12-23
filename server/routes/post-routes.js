@@ -270,42 +270,43 @@ router.patch(
  *       '404':
  *         description: Post not found.
 
- *   patch:
- *     security:
- *       - Authorization: []
- *     tags:
- *       - Posts
- *     summary: Add or remove like on a post by ID
- *     description: Adds or removes a like on a post by its ID.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the post to add or remove like.
- *       - in: body
- *         name: LikeBody
- *         description: User's like information.
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             username:
- *               type: string
- *               description: Username of the user performing like/unlike action.
- *           example:
- *             username: "user123"
- *     responses:
- *       '200':
- *         description: Successful. Like added or removed.
- *       '401':
- *         description: Unauthorized. User is not authenticated.
- *       '403':
- *         description: Forbidden. User does not have access to like or unlike this post.
- *       '404':
- *         description: Post not found.
+  *   patch:
+  *     security:
+  *       - Authorization: []
+  *     tags:
+  *       - Posts
+  *     summary: Add or remove like on a post by ID
+  *     description: Adds or removes a like on a post by its ID.
+  *     parameters:
+  *       - in: path
+  *         name: id
+  *         required: true
+  *         schema:
+  *           type: string
+  *         description: ID of the post to add or remove like.
+  *     requestBody:
+  *       required: true
+  *       content:
+  *         application/json:
+  *           schema:
+  *             type: object
+  *             properties:
+  *               username:
+  *                 type: string
+  *                 description: Username of the user performing like/unlike action.
+  *           example:
+  *             username: "user123"
+  *     responses:
+  *       '200':
+  *         description: Successful. Like added or removed.
+  *       '401':
+  *         description: Unauthorized. User is not authenticated.
+  *       '403':
+  *         description: Forbidden. User does not have access to like or unlike this post.
+  *       '404':
+  *         description: Post not found.
  */
+
 /**
  * @swagger
  * /p/{id}/comments:
