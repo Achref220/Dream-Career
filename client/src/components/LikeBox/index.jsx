@@ -18,16 +18,18 @@ const LikeBox = ({ likes, likeCount }) => {
       }}
     >
       <AvatarGroup max={4}>
-        {likes
-          .slice(0, isNonMobileScreens ? 4 : 3)
-          .map(({ username, profilePhotoUrl }, i) => (
+      {likes
+        .slice(0, isNonMobileScreens ? 4 : 3)
+        .map(({ username, profilePhotoUrl }, i) => {
+          return (
             <Avatar
               key={uuidv4()}
               sx={{ width: 23, height: 23 }}
               alt={username}
-              src={profilePhotoUrl}
+              src={profilePhotoUrl.length > 0 ? profilePhotoUrl[0].url : "https://i.stack.imgur.com/l60Hf.png"}
             />
-          ))}
+          );
+        })}
       </AvatarGroup>
 
       <Box component={"span"} sx={{ ml: "0.5rem" }}>

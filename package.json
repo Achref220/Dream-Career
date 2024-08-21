@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/FOR-TIMI/Dream-Career#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react-redux": "^9.0.4",
+    "redux": "^5.0.1"
   },
   "engines": {
     "node": ">=18.12.1 <19.0.0"

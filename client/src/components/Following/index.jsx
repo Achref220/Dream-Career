@@ -3,9 +3,7 @@ import {
   PersonAddOutlined,
   PersonRemoveOutlined,
 } from "@mui/icons-material";
-
 import { useState } from "react";
-
 import {
   Box,
   CircularProgress,
@@ -18,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { setFollowing } from "../../state";
 import FlexBetween from "../CustomStyledComponents/FlexBetween";
 import UserAvatar from "../CustomStyledComponents/UserAvatar";
-
 import { SERVER_URL } from "../../service/config";
 import { socket } from "../../service/socket";
 import PostOptionsModal from "../PostOptionsModal";
@@ -28,7 +25,7 @@ const Following = ({
   name = "",
   subtitle = "",
   isAuthor,
-  userProfilePhotoUrl,
+  userProfilePhotoUrl = "",
   postId = "",
 }) => {
   const dispatch = useDispatch();
@@ -82,7 +79,7 @@ const Following = ({
 
   return (
     <FlexBetween>
-      {/* Options modal  */}
+      {/* Options modal */}
       {isModalOpen && (
         <PostOptionsModal
           open={isModalOpen}
@@ -90,13 +87,16 @@ const Following = ({
           postId={postId}
         />
       )}
-      <FlexBetween gap="1rem">
+
+      {/* Avatar and user info */}
+      <FlexBetween>
         <UserAvatar image={userProfilePhotoUrl} size="55px" />
         <Box
           onClick={() => {
             navigate(`/profile${name !== username ? "/" + name : ""}`);
             navigate(0);
           }}
+          sx={{ flexGrow: 1, ml: "1rem" }} // Add margin-left for space between avatar and text
         >
           <Typography
             color={main}
@@ -109,20 +109,22 @@ const Following = ({
               },
             }}
           >
-            {name.length > 17 ? `${name.substring(0, 17)}...` : name}
+            {name.length > 14 ? `${name.substring(0, 14)}...` : name}
           </Typography>
           <Typography color={medium} fontSize="0.75rem">
-            {subtitle.length > 17
-              ? `${subtitle.substring(0, 17)}...`
+            {subtitle.length > 14
+              ? `${subtitle.substring(0, 14)}...`
               : subtitle}
           </Typography>
         </Box>
       </FlexBetween>
+
+      {/* Follow/unfollow or more options button */}
       {!isAuthor ? (
         <IconButton
           onClick={() => updateFollowing()}
           disabled={loading}
-          sx={{ backgroundColor: light, p: "0.6rem" }}
+          sx={{ backgroundColor: light, p: "0.6rem", ml: "1rem" }} // Add margin-left to separate from the text
         >
           {loading ? (
             <CircularProgress size={20} />
@@ -135,7 +137,7 @@ const Following = ({
       ) : (
         <IconButton
           disabled={loading}
-          sx={{ backgroundColor: light, p: "0.6rem" }}
+          sx={{ backgroundColor: light, p: "0.6rem", ml: "1rem" }} // Add margin-left for spacing
           onClick={handleModalOpen}
         >
           <MoreHoriz sx={{ color: dark }} />
