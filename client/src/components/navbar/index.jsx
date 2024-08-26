@@ -4,7 +4,9 @@ import './navbar.css'
 import {
   Box,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Typography,
+  Chip
 } from "@mui/material";
 
 import {
@@ -52,6 +54,7 @@ const Navbar = () => {
   const alt = theme.palette.background.light;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const version = "v1.0.0";
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuToggled(!isMobileMenuToggled);
@@ -89,7 +92,15 @@ const Navbar = () => {
       >
         <FlexBetween gap="40rem">
         <div style={{display: "flex"}}>
-        <img style={{cursor: "pointer"}} onClick={handleClick} width={"50px"} className="vector"  src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/inztzhvf3al-4%3A95?alt=media&token=15bd6259-97ed-40d1-a662-85d26bf4feda" alt="rt" />
+          <div>
+          <img style={{cursor: "pointer"}} onClick={handleClick} width={"50px"} className="vector"  src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/inztzhvf3al-4%3A95?alt=media&token=15bd6259-97ed-40d1-a662-85d26bf4feda" alt="rt" />
+          <Chip 
+            label={`Beta ${" " + version}`} 
+            color="secondary" 
+            size="small" 
+            sx={{ left: "50px", fontWeight: "bold", position: "absolute" }}
+          />
+          </div>
         <Menu
         anchorEl={anchorEl}
         id="account-menu"
