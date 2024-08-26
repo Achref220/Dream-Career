@@ -1,11 +1,10 @@
 import { useState } from "react";
+import './navbar.css'
+
 import {
   Box,
-  IconButton,
-  Typography,
   useTheme,
-  useMediaQuery,
-  Tooltip,
+  useMediaQuery
 } from "@mui/material";
 
 import {
@@ -14,14 +13,24 @@ import {
   DarkMode,
   Notifications,
   Help,
-  Menu,
   Close,
   Leaderboard,
+  Logout,
 } from "@mui/icons-material";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import FlagIcon from '@mui/icons-material/Flag';
+import SettingsIcon from '@mui/icons-material/Settings';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 import SearchBar from "../SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { setMode } from "../../state";
+import { setLogout, setMode } from "../../state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "../CustomStyledComponents/FlexBetween";
 
@@ -34,13 +43,15 @@ const Navbar = () => {
   const { username, profilePhotoUrl } = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const  mode  = useSelector((state) => state.mode)
-  console.log(mode);
+  const { palette } = useTheme();
+  const grey = palette.grey;
 
   const theme = useTheme();
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
-  const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.light;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuToggled(!isMobileMenuToggled);
@@ -48,6 +59,13 @@ const Navbar = () => {
 
   const handleModeChange = () => {
     dispatch(setMode());
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -60,6 +78,8 @@ const Navbar = () => {
         boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.5)",
         backgroundColor: theme.palette.background.light,
         position: "sticky",
+        display: "flex",
+        justifyContent: "center"
       }}
     >
       <FlexBetween
@@ -67,23 +87,92 @@ const Navbar = () => {
         backgroundColor={alt}
         sx={{ position: "fixed", width: "100%", backgroundColor: mode === "dark" ? "black" : theme.palette.background.ligh}}
       >
-        <FlexBetween gap="1.75rem">
+        <FlexBetween gap="40rem">
         <div style={{display: "flex"}}>
-        <img onClick={() => navigate("/")} width={"50px"} src="/assets/logo png.png" alt="rt" />
-          <Typography
-            
-            fontSize="clamp(1rem, 2rem, 2.25rem)"
-            color="#ffff"
-            onClick={() => navigate("/")}
-            sx={{
-              "&:hover": {
-                color: primaryLight,
-                cursor: "pointer",
-              },
-            }}
-          >
-            Dreaca
-          </Typography>
+        <img style={{cursor: "pointer"}} onClick={handleClick} width={"50px"} className="vector"  src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/inztzhvf3al-4%3A95?alt=media&token=15bd6259-97ed-40d1-a662-85d26bf4feda" alt="rt" />
+        <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        sx={{
+          width: "100%"
+        }}
+        PaperProps={{
+          elevation: 5,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 50,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem 
+           sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/profilePage')}> 
+           <ListItemIcon>        
+             <PersonOutlineIcon sx={{  marginRight: "1rem", color : grey, fontSize: "1.3rem"}}/>
+          </ListItemIcon>
+           Profile
+        </MenuItem>
+        <MenuItem
+           sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/Saved')}
+        > 
+        <ListItemIcon>
+          <BookmarkBorderIcon fontSize="medium" sx={{ marginRight: "1rem", color : grey }}/> 
+        </ListItemIcon>
+        Saved
+        </MenuItem>
+        <MenuItem
+           sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+           onClick={() => navigate('/Settings')} 
+        >
+          <ListItemIcon>
+            <SettingsIcon fontSize="medium" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem
+           sx={{width: "13rem", fontSize: "0.9rem" ,padding: "0.6rem 1rem"}}
+        >
+          <ListItemIcon>
+            <FlagIcon fontSize="medium" />
+          </ListItemIcon>
+          <a href="https://github.com/Achref220/Dream-Career/issues" target='_blanc' style={{color: "black"}}>
+          Report Problem
+          </a>
+        </MenuItem>
+
+        <Divider />
+        <MenuItem onClick={() => dispatch(setLogout())}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
         </div>
           {isNonMobileScreens && <SearchBar />}
         </FlexBetween>

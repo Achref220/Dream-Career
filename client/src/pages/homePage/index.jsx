@@ -8,34 +8,35 @@ import AdWidget from "../widgets/AdWidget";
 import Suggestions from "../widgets/Suggestions";
 
 const HomePage = () => {
-  // Detect if the screen width is above or below 1000px
+  // Detect if the screen width is above or below 1000px and 1280px
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const isLaptopScreen = useMediaQuery("(min-width: 1280px)");
 
   // Retrieve username and profile photo from Redux state
   const { username, profilePhotoUrl } = useSelector((state) => state.user);
 
   return (
-    <Box>
+    <Box justifyContent={"center"} alignItems={"center"}>
       <Navbar />
       <Box
         width="100%"
-        padding="2rem 6%"
+        marginTop={"20px"}
         display="flex"
         flexDirection={isNonMobileScreens ? "row" : "column"} // Adjust layout based on screen size
         gap="1.5rem"
-        justifyContent={isNonMobileScreens ? "space-between" : "center"}
+        justifyContent={isLaptopScreen ? "space-around" : isNonMobileScreens ? "space-around" : "center"}
         alignItems={isNonMobileScreens ? "flex-start" : "center"} // Center items for small screens
       >
         {/* Suggestions */}
-        {isNonMobileScreens && (
-          <Box flexBasis="18%">
+        {isLaptopScreen && (
+          <Box flexBasis="10%"> {/* Adjust flexBasis for laptop screens */}
             <Suggestions username={username} />
           </Box>
         )}
 
         {/* Main Post Area */}
         <Box
-          flexBasis={isNonMobileScreens ? "50%" : "100%"} // Adjust width for mobile and desktop
+          flexBasis={isLaptopScreen ? "30%" : isNonMobileScreens ? "50%" : "100%"} // Adjust width for laptop, mobile, and desktop
           mt={isNonMobileScreens ? undefined : "2rem"} // Add margin on mobile
         >
           <MyPostWidget profilePhotoUrl={profilePhotoUrl} />
@@ -44,7 +45,7 @@ const HomePage = () => {
 
         {/* Ad and Following Widgets */}
         {isNonMobileScreens && (
-          <Box flexBasis="26%">
+          <Box flexBasis={isLaptopScreen ? "24%" : "26%"}> {/* Adjust flexBasis for laptop screens */}
             <AdWidget />
             <Box m="2rem 0" />
             <FollowingListWidget username={username} />

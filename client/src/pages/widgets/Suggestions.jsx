@@ -58,9 +58,6 @@ const Suggestions = ({ username }) => {
     <WidgetWrapper
       sx={{
         minHeight: "400px", // Ensure a stable height
-        minWidth: "350px", // Set a minimum width to prevent shrinking
-        maxWidth: "350px", // Set a maximum width to prevent expanding
-        width: "100%", // Let it be flexible but within constraints
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",

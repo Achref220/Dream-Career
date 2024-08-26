@@ -118,7 +118,7 @@ const SinglePostWidget = ({
     <Box
       m="0 0 2rem 0"
       sx={{
-        width: "850px",
+        maxWidth: "650px",
         backgroundColor: palette.background.alt,
         borderRadius: "0.75rem",
         padding: isNonMobileScreens
