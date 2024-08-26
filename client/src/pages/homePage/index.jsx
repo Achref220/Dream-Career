@@ -6,6 +6,7 @@ import PostsWidget from "../widgets/PostsWidget";
 import FollowingListWidget from "../widgets/FollowingListWidget";
 import AdWidget from "../widgets/AdWidget";
 import Suggestions from "../widgets/Suggestions";
+import Chatbotai from "../../components/ChatBotAi/Chatbotai";
 
 const HomePage = () => {
   // Detect if the screen width is above or below 1000px and 1280px
@@ -29,8 +30,9 @@ const HomePage = () => {
       >
         {/* Suggestions */}
         {isLaptopScreen && (
-          <Box flexBasis="10%"> {/* Adjust flexBasis for laptop screens */}
+          <Box flexBasis="10%" sx={{display: "flex", flexDirection: "column"}}> {/* Adjust flexBasis for laptop screens */}
             <Suggestions username={username} />
+            <Chatbotai />
           </Box>
         )}
 

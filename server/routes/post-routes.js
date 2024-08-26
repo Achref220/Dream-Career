@@ -10,6 +10,7 @@ const {
   deletePost,
   getPostById,
 } = require("../controllers/post-controller");
+const OpenAI = require("openai");
 
 /**================Comment controller=================== */
 const {
@@ -30,6 +31,27 @@ const { authMiddleware } = require("../middleware/jwt-config");
 
 /**================isAuthor Middleware=================== */
 const { isCommentAuthor, isPostAuthor } = require("../middleware/middleware");
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Store your API key in an environment variable
+});
+
+router.post("/api/chat", async (req, res) => {
+  const { messages } = req.body;
+
+  try {
+    console.log("chat gpt working");
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo", // or "gpt-3.5-turbo" if you're using GPT-3.5
+      messages,
+    });
+
+    res.json(completion.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch AI response." });
+  }
+});
 
 /**=========Posts================== */
 router
