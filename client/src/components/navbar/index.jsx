@@ -5,7 +5,6 @@ import {
   Box,
   useTheme,
   useMediaQuery,
-  Typography,
   Chip
 } from "@mui/material";
 
@@ -65,6 +64,7 @@ const Navbar = () => {
   };
 
   const handleClick = (event) => {
+    navigate('/')
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -94,12 +94,14 @@ const Navbar = () => {
         <div style={{display: "flex"}}>
           <div>
           <img style={{cursor: "pointer"}} onClick={handleClick} width={"50px"} className="vector"  src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/inztzhvf3al-4%3A95?alt=media&token=15bd6259-97ed-40d1-a662-85d26bf4feda" alt="rt" />
-          <Chip 
-            label={`Beta ${" " + version}`} 
-            color="secondary" 
-            size="small" 
-            sx={{ left: "50px", fontWeight: "bold", position: "absolute" }}
-          />
+          <Tooltip title="Welcome to our beta app! Please keep in mind that we're still refining features and making improvements. You may encounter some unfinished functionalities, and we greatly appreciate your feedback and patience as we continue to enhance your experience!">
+            <Chip 
+              label={`Beta ${" " + version}`} 
+              color="secondary" 
+              size="small" 
+              sx={{ left: "50px", fontWeight: "bold", position: "absolute" }}
+            />
+          </Tooltip>
           </div>
         <Menu
         anchorEl={anchorEl}
