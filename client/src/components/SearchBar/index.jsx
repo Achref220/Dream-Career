@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 import FlexBetween from "../CustomStyledComponents/FlexBetween";
 import UserAvatar from "../CustomStyledComponents/UserAvatar";
 
-const SearchBar = () => {
+const SearchBar = ({isMobileScreen}) => {
   const [loading, setLoading] = useState(true);
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -107,6 +107,7 @@ const SearchBar = () => {
         position: "relative",
         display: "flex",
         justifyContent: "center",
+        width: isMobileScreen ? "180px" : null
       }}
     >
       <FlexBetween

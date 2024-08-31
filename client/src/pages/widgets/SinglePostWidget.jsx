@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../../state";
 import { fToNow } from "../../utils/formatDate";
-import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined } from "@mui/icons-material";
+import { FavoriteBorderOutlined, FavoriteOutlined } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import {
   Box, IconButton, Typography, useMediaQuery, useTheme, Dialog, DialogActions,
@@ -19,6 +19,7 @@ import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
+import ReviewsIcon from '@mui/icons-material/Reviews';
 
 const SinglePostWidget = ({
   postId,
@@ -38,6 +39,7 @@ const SinglePostWidget = ({
   const [rating, setRating] = useState(0); // Add state for rating
   const [open, setOpen] = useState(false); // State to control dialog
   const [reviewText, setReviewText] = useState(""); // State to handle review text
+  const theme = useTheme()
 
   const isNonMobileScreens = useMediaQuery("(min-width: 800px)");
   const imageHeight = isNonMobileScreens ? "450px" : "300px";
@@ -214,7 +216,7 @@ const SinglePostWidget = ({
 
           <FlexBetween gap="0.3rem">
             <IconButton onClick={() => setIsComments(!isComments)}>
-              <ChatBubbleOutlineOutlined />
+              <ReviewsIcon />
             </IconButton>
             <Typography>{fShortenNumber(commentCount) || 0}</Typography>
           </FlexBetween>
@@ -222,15 +224,19 @@ const SinglePostWidget = ({
 
         {/* Star Rating */}
         <FlexBetween>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", borderRadius: "30px", border: "1px solid",borderColor: theme.palette.background.light, paddingRight: "5px", paddingLeft: "5px", gap: "5px"}}>
             <ReactStars
               count={5}
               onChange={handleClickOpen} // Open the dialog on star click
-              size={30}
+              size={23}
               isHalf={true}
               activeColor="#ffd700"
               value={rating}
             />
+
+          <Typography color={theme.palette.background.light} sx={{ mt: "0.6rem", fontWeight: 600, fontSize: "11px" }}>
+            Send your Feedback
+          </Typography>
           </Box>
         </FlexBetween>
       </FlexBetween>

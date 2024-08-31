@@ -24,10 +24,11 @@ import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./utils/theme";
 
 import { setLogout } from './state'
-
+import './index.css';
 import useTokenExpiration from './utils/checkToken'
 import Settings from './pages/Settings/Settings'
 import Leaderboard from './pages/Leaderboard/index'
+import Calendar from './components/Calendar'
 
 
 const App = () => { 
@@ -71,7 +72,11 @@ const App = () => {
             </Route>
 
             <Route path="/leaderboard">
-                <Route path='/leaderboard'  element={isLoggedIn ? <Leaderboard /> : <Navigate to="/leaderboard" />} />
+                <Route path='/leaderboard'  element={isLoggedIn ? <Leaderboard /> : <Navigate to="/login" />} />
+            </Route>
+
+            <Route path="/calendar">
+                <Route path='/calendar'  element={isLoggedIn ? <Calendar /> : <Navigate to="/login" />} />
             </Route>
 
             <Route

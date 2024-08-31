@@ -111,7 +111,7 @@ const PostsWidget = ({ username, isProfile = false }) => {
   }
 
   return (
-    <Box>
+    <Box sx={{minWidth: "260px"}}>
       {posts.map(
         ({
           _id,

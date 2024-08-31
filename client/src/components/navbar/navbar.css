@@ -150,9 +150,18 @@ p {
 }
 
 .vector {
-  position: absolute;
+  position: fixed;
   top: 26px;
-  left: 150px;
+  right: 150px;
   width: 102px;
   height: 102px;
+}
+@media only screen and (max-width: 600px) {
+  .vector {
+    position: fixed;
+    top: 30px;
+    width: 80px;  /* Adjust the width for mobile screens */
+    height: 80px; /* Adjust the height for mobile screens */
+    right: 20px;  /* Adjust the position if needed */
+  }
 }

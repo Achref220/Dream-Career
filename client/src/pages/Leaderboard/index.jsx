@@ -5,23 +5,23 @@ import { Box, Typography } from "@mui/material";
 const Leaderboard = () => {
   let clubs = [
     {
-      clubName: "club1",
+      clubName: "Club 1",
       ClubPoints: "1260",
     },
     {
-      clubName: "club2",
+      clubName: "Club 2",
       ClubPoints: "900",
     },
     {
-      clubName: "club3",
+      clubName: "Club 3",
       ClubPoints: "800",
     },
     {
-      clubName: "club4",
+      clubName: "Club 4",
       ClubPoints: "600",
     },
     {
-      clubName: "club5",
+      clubName: "Club 5",
       ClubPoints: "202",
     },
   ];
@@ -44,7 +44,7 @@ const Leaderboard = () => {
         <Typography
         fontWeight="bold"
         textAlign="center"
-        paddingTop="1rem"
+        paddingTop="5rem"
         fontSize="clamp(1rem, 2rem, 2.25rem)"
         color={"primary"}
         sx={{
@@ -54,7 +54,7 @@ const Leaderboard = () => {
           },
         }}
       >
-        Clubs Leaderboard
+        CLUBS LEADERBOARD
       </Typography>
         <div
           style={{
@@ -91,18 +91,19 @@ const Leaderboard = () => {
                 height: "506px",
               }}
             />
-            <div
+            <img
               style={{
                 position: "absolute",
                 top: "70.9px",
                 left: "66.9px",
                 borderRadius: "50%",
-                backgroundColor: "#322144",
                 border: "7px solid #ffca28",
                 boxSizing: "border-box",
                 width: "210.9px",
                 height: "210.9px",
               }}
+              src="https://www.shutterstock.com/image-vector/vector-graphic-red-black-symbol-600nw-222723730.jpg"
+              alt="firstimg"
             />
             {/* <img
             style={{
@@ -126,8 +127,15 @@ const Leaderboard = () => {
                 height: "56px",
               }}
             >
+              <Typography
+              fontWeight="bold"
+              textAlign="center"
+              paddingTop="1rem"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              >
               Club 1
-            </b>
+            </Typography>
+              </b>
             <div
               style={{
                 position: "absolute",
@@ -198,12 +206,18 @@ const Leaderboard = () => {
                 height: "60px",
               }}
             >
+              <Typography
+              fontWeight="bold"
+              textAlign="center"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              >
               Club 3
+            </Typography>
             </b>
             <img
               style={{
                 position: "absolute",
-                top: "-7px",
+                top: "-4px",
                 left: "-7px",
                 borderRadius: "50%",
                 width: "153.2px",
@@ -211,7 +225,7 @@ const Leaderboard = () => {
                 objectFit: "cover",
               }}
               alt=""
-              src="/ellipse-57@2x.png"
+              src="https://i.pinimg.com/originals/70/ec/35/70ec351aa029af30ebcb3acc888b328f.jpg"
             />
             <div
               style={{
@@ -282,19 +296,19 @@ const Leaderboard = () => {
                 height: "151px",
               }}
             >
-              {/* <img
+              <img
               style={{
                 position: "absolute",
-                top: "-6px",
+                top: "-3px",
                 left: "-7px",
                 borderRadius: "50%",
                 width: "166px",
                 height: "164px",
                 objectFit: "cover",
               }}
-              alt=""
-              src="/ellipse-571@2x.png"
-            /> */}
+              alt="sqd"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScIqgXN3Lrw2VFHfupxomMUmKicme7Nd74Pg&s"
+            />
               <div
                 style={{
                   position: "absolute",
@@ -354,7 +368,13 @@ const Leaderboard = () => {
                 width: "206px",
               }}
             >
+              <Typography
+              fontWeight="bold"
+              textAlign="center"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              >
               Club 2
+            </Typography>
             </b>
           </div>
           <div
@@ -392,8 +412,18 @@ const Leaderboard = () => {
                       : "#ffff",
                 }}
               >
-                <span style={{ marginLeft: "10px" }}>{cl.clubName}</span>
-                <span style={{ marginRight: "10px" }}>{cl.ClubPoints}</span>
+                <Typography
+                  marginLeft={"10px"}
+                  fontSize="clamp(1rem, 2rem, 2.25rem)"
+                >
+                  {cl.clubName}
+                </Typography>
+                <Typography
+                  marginRight={"10px"}
+                  fontSize="clamp(1rem, 2rem, 2.25rem)"
+                >
+                  {cl.ClubPoints}
+                </Typography>
               </Box>
             ))}
           </div>

@@ -58,6 +58,7 @@ const Suggestions = ({ username }) => {
     <WidgetWrapper
       sx={{
         minHeight: "400px", // Ensure a stable height
+        minWidth: "250px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -83,23 +84,32 @@ const Suggestions = ({ username }) => {
       </FlexBetween>
 
       <Box>
-        {userSuggestions.map(
-          ({ _id, username, occupation, profilePhotoUrl }) => (
-            <Box display="flex" flexDirection="column" gap="2rem" marginBottom={"10px"} key={_id}>
-              <Following
-                isProfile={true}
-                key={uuidv4()}
-                followingId={_id}
-                name={username}
-                subtitle={occupation}
-                userProfilePhotoUrl={
-                  profilePhotoUrl?.length > 0 ? profilePhotoUrl[0].url : "https://i.stack.imgur.com/l60Hf.png"
-                }
-              />
-            </Box>
-            
+        {userSuggestions.length > 0 ? (
+          userSuggestions.map(
+            ({ _id, username, occupation, profilePhotoUrl }) => (
+              <Box display="flex" flexDirection="column" gap="2rem" marginBottom={"10px"} key={_id}>
+                <Following
+                  isProfile={true}
+                  key={uuidv4()}
+                  followingId={_id}
+                  name={username}
+                  subtitle={occupation}
+                  userProfilePhotoUrl={
+                    profilePhotoUrl?.length > 0 ? profilePhotoUrl[0].url : "https://i.stack.imgur.com/l60Hf.png"
+                  }
+                />
+              </Box>
+              
+            )
           )
-        )}
+        ) : <Typography
+        color={palette.neutral.dark}
+        variant="h5"
+        fontWeight="500"
+        sx={{ mb: "9.5rem" }}
+      >
+        There is no suggestions yet !
+      </Typography>}
       </Box>
 
       {hasMore && (
