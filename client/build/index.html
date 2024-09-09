@@ -2,32 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Dream Career - Discover and engage with university events. Find opportunities to connect, learn, and grow through a wide range of university-based activities." />
-    <meta name="keywords" content="university events, campus activities, student engagement, career events, university networking, event posting, education opportunities" />
-    <meta name="author" content="Dreaca" />
-    
-    <!-- Open Graph meta tags for better social media sharing -->
-    <meta property="og:title" content="Dream Career - University Events & Engagement" />
-    <meta property="og:description" content="Stay connected with university events. Post, explore, and engage with activities happening across campuses." />
-    <meta property="og:image" content="/static/images/og-image.png" />
-    <meta property="og:url" content="https://dreaca.com/" />
-    <meta property="og:type" content="website" />
-    
-    <!-- Twitter card for sharing -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Dream Career - University Events & Engagement" />
-    <meta name="twitter:description" content="Discover university events and connect with students and professionals through campus activities." />
-    <meta name="twitter:image" content="/static/images/twitter-card-image.png" />
-    
-    <link rel="icon" href="/logo-png.png" />
-    <link rel="canonical" href="https://dreaca.com/" />
-    <link rel="stylesheet" href="/static/css/main.c61a998d.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
 
-    <title>Dream Career - University Events & Student Engagement</title>
-    <script defer="defer" src="/static/js/main.f0ab6302.js"></script>
+    <!-- Primary Meta Tags -->
+    <title>Dream Career</title>
+    <meta
+      name="description"
+      content="Dream Career is your portal to finding and engaging in opportunities for personal and professional growth."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="%PUBLIC_URL%/logo png.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dreaca.com" />
+    <meta property="og:title" content="Dream Career" />
+    <meta
+      property="og:description"
+      content="Dream Career helps you find job opportunities, events, and more to grow your career."
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://dreaca.com" />
+    <meta property="twitter:title" content="Dream Career" />
+    <meta
+      property="twitter:description"
+      content="Dream Career helps you find job opportunities, events, and more to grow your career."
+    />
+    <meta property="twitter:image" content="%PUBLIC_URL%/twitter-image.png" />
+
+    <!-- Preconnect for Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/styles.css" />
+
+    <!-- Manifest for PWA (if applicable) -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   </head>
   <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- Loading the main JavaScript file -->
+    <script src="%PUBLIC_URL%/main.js" defer></script>
   </body>
 </html>
+
