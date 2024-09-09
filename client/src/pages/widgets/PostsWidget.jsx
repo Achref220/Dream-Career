@@ -7,7 +7,7 @@ import SinglePostWidget from "./SinglePostWidget";
 
 import SinglePostSkeleton from "../../components/Skeletons/SinglePostSkeleton";
 import { SERVER_URL } from "../../service/config";
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
 
 const PostsWidget = ({ username, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -111,7 +111,12 @@ const PostsWidget = ({ username, isProfile = false }) => {
   }
 
   return (
-    <Box sx={{minWidth: "260px"}}>
+    <Box
+      sx={{
+        minWidth: "260px",
+        
+      }}
+    >
       {posts.map(
         ({
           _id,

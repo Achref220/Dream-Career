@@ -29,6 +29,7 @@ import useTokenExpiration from './utils/checkToken'
 import Settings from './pages/Settings/Settings'
 import Leaderboard from './pages/Leaderboard/index'
 import Calendar from './components/Calendar'
+import Landingpage from './components/LandingPage/Landingpage'
 
 
 const App = () => { 
@@ -45,49 +46,40 @@ const App = () => {
 
   return (
     <main>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
         <ToastContainer />
-          <CssBaseline/>
-          <Routes>
-            <Route path='/' element={isLoggedIn ? <HomePage/> : <Navigate to="/login" />}/>
+        <CssBaseline />
+        <Routes>
+          <Route path="/" element={!isLoggedIn ? <Landingpage /> : <HomePage />} />
 
-            <Route path='/'>
-                <Route path="login" element={!isLoggedIn ? <LoginPage/> : <Navigate to="/" />} />
-                <Route path="register" element={!isLoggedIn ? <LoginPage/> : <Navigate to="/" />} />
-            </Route>
+          <Route path="/">
+            <Route path="login" element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path="register" element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" />} />
+          </Route>
 
-            <Route path="/direct">
-                <Route path="inbox" element={isLoggedIn ? <DirectMessagePage/> : <Navigate to="/login" />}></Route>
-                <Route path="new" element={isLoggedIn ? <DirectMessagePage isModal={true}/> : <Navigate to="/login" />}></Route>
-            </Route>
+          <Route path="/direct">
+            <Route path="inbox" element={isLoggedIn ? <DirectMessagePage /> : <Navigate to="/login" />} />
+            <Route path="new" element={isLoggedIn ? <DirectMessagePage isModal={true} /> : <Navigate to="/login" />} />
+          </Route>
 
-            <Route path="/profilePage">
-                <Route path=":username" element={isLoggedIn ? <ProfilePage/> : <Navigate to="/login" />} />
-                <Route path="" element={isLoggedIn ? <ProfilePage/> : <Navigate to="/login" />} />
-            </Route>
+          <Route path="/profilePage">
+            <Route path=":username" element={isLoggedIn ? <ProfilePage /> : <Navigate to="/login" />} />
+            <Route path="" element={isLoggedIn ? <ProfilePage /> : <Navigate to="/login" />} />
+          </Route>
 
-            <Route path="/settings">
-                <Route path='/settings'  element={isLoggedIn ? <Settings /> : <Navigate to="/login" />} />
-            </Route>
+          <Route path="/settings" element={isLoggedIn ? <Settings /> : <Navigate to="/login" />} />
 
-            <Route path="/leaderboard">
-                <Route path='/leaderboard'  element={isLoggedIn ? <Leaderboard /> : <Navigate to="/login" />} />
-            </Route>
+          <Route path="/leaderboard" element={isLoggedIn ? <Leaderboard /> : <Navigate to="/login" />} />
 
-            <Route path="/calendar">
-                <Route path='/calendar'  element={isLoggedIn ? <Calendar /> : <Navigate to="/login" />} />
-            </Route>
+          <Route path="/calendar" element={isLoggedIn ? <Calendar /> : <Navigate to="/login" />} />
 
-            <Route
-                path="*"
-                element={isLoggedIn ? <HomePage/> : <Navigate to="/login" />}
-              />
+          <Route path="*" element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />} />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
+</main>
 
-          </Routes>
-        </ThemeProvider>
-      </BrowserRouter>
-    </main>
   )
 }
 

@@ -2,6 +2,11 @@ import {
   Box,
   Button,
   CircularProgress,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
   useMediaQuery,
@@ -18,7 +23,7 @@ import { setLogin, setPerson } from "../../state";
 import { SERVER_URL } from "../../service/config";
 import { loginSchema, registerSchema } from "../../utils/Schemas";
 import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper";
-import { keyframes } from "@emotion/react";
+
 
 import "./index.css";
 
@@ -35,47 +40,7 @@ const initialValuesLogin = {
   password: "",
 };
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
 
-const slideFromRight = keyframes`
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
-const slideFromLeft = keyframes`
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
-const slideFromBottom = keyframes`
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
 
 const Form = () => {
   const location = useLocation().pathname.slice(1);
@@ -230,7 +195,7 @@ const Form = () => {
       >
         <WidgetWrapper
           width={isNonMobile ? "500px" : "370px"}
-          sx={{ borderRadius: "50px", animation: `${slideFromLeft} 1s ease-in-out` }}
+          sx={{ borderRadius: "50px" }}
           className="wdwrapper"
         >
           {!isNonMobile ? (
@@ -296,19 +261,33 @@ const Form = () => {
                         helperText={touched.location && errors.location}
                         sx={{ gridColumn: "span 4" }}
                       />
-                      <TextField
-                        label="Occupation"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.occupation}
-                        name="occupation"
+                      <FormControl
                         error={
                           Boolean(touched.occupation) &&
                           Boolean(errors.occupation)
                         }
-                        helperText={touched.occupation && errors.occupation}
                         sx={{ gridColumn: "span 4" }}
-                      />
+                      >
+                        <InputLabel id="occupation-label">
+                          Occupation
+                        </InputLabel>
+                        <Select
+                          labelId="occupation-label"
+                          id="occupation"
+                          name="occupation"
+                          value={values.occupation}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          label="Occupation"
+                        >
+                          <MenuItem value="Student">Student</MenuItem>
+                          <MenuItem value="Association">Association</MenuItem>
+                          <MenuItem value="Sponsor">Sponsor</MenuItem>
+                        </Select>
+                        {touched.occupation && errors.occupation && (
+                          <FormHelperText>{errors.occupation}</FormHelperText>
+                        )}
+                      </FormControl>
                     </>
                   )}
 
@@ -370,21 +349,20 @@ const Form = () => {
           </Formik>
         </WidgetWrapper>
         <Button
-            form="authForm"
-            className="login-btn"
-            type="submit"
-            disabled={loading}
-            sx={{
-              width: isNonMobile ? "350px" : "250px",
-              m: "2rem 0",
-              p: "0.8rem",
-              backgroundColor: "#ffff",
-              color: "#14b3c1",
-              fontSize: "17px",
-              animation: `${slideFromBottom} 1s ease-in-out`, // Apply the animation
-              "&:hover": { color: "#14b3c1", backgroundColor: "#ffff" },
-            }}
-          >
+          form="authForm"
+          className="login-btn"
+          type="submit"
+          disabled={loading}
+          sx={{
+            width: isNonMobile ? "350px" : "250px",
+            m: "2rem 0",
+            p: "0.8rem",
+            backgroundColor: "#ffff",
+            color: "#14b3c1",
+            fontSize: "17px",
+            "&:hover": { color: "#14b3c1", backgroundColor: "#ffff" },
+          }}
+        >
           {loading ? (
             <CircularProgress
               sx={{
@@ -425,14 +403,14 @@ const Form = () => {
             alignItems: "center",
           }}
         >
-          <Box sx={{ animation: `${slideFromRight} 1s ease-in-out` }}>
-          <img
-            onClick={() => navigate("/")}
-            width={"600px"}
-            className="logoimg"
-            src="/assets/image_1.png"
-            alt="logo"
-          />
+          <Box>
+            <img
+              onClick={() => navigate("/")}
+              width={"600px"}
+              className="logoimg"
+              src="/assets/image_1.png"
+              alt="logo"
+            />
           </Box>
           <Typography
             textAlign={"end"}
@@ -441,7 +419,6 @@ const Form = () => {
               fontSize: "18px",
               bottom: "20px",
               color: "#14b3c1",
-              animation: `${fadeIn} 1s ease-in-out`,
               "&:hover": {
                 cursor: "pointer",
                 color: palette.primary.dark,

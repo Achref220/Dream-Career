@@ -137,6 +137,13 @@ const SinglePostWidget = ({
         padding: isNonMobileScreens
           ? "1.5rem 1.5rem 0.75rem 1.5rem"
           : "1.5rem 0",
+        width: {
+          xs: "90%", // Full width on extra-small screens (mobile)
+          sm: "100%"
+        },
+        margin: "0 auto", // Center the box horizontally
+        marginBottom: "10px"
+      
       }}
     >
       <Box sx={{ padding: !isNonMobileScreens ? "0 0.75rem" : "" }}>

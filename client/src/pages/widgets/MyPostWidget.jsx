@@ -140,7 +140,9 @@ const MyPostWidget = ({ profilePhotoUrl }) => {
   };
 
   return (
-    <WidgetWrapper m="0 0 2rem 0" sx={{ textAlign: "center" }}>
+    <WidgetWrapper m="0 0 2rem 0" sx={{ textAlign: "center",width: {
+      xs: "90%", sm: "100%"
+      }, margin: "0 auto", marginBottom: "10px"}}>
       <ToastContainer />
       <FlexBetween gap="1.5rem">
         <UserAvatar image={(profilePhotoUrl.length > 0) ? profilePhotoUrl[0].url : 'https://i.stack.imgur.com/l60Hf.png'} />

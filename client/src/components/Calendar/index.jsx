@@ -133,7 +133,7 @@ const Calendar = () => {
   return (
     <>
     <Navbar />
-    <div className="max-w-7xl mx-auto p-4 flex flex-col md:flex-row">
+    <div className="max-w-7xl mx-auto p-4 flex flex-col md:flex-row mt-[20px]">
       {/* Calendar Section */}
       <div className="flex-1 mt-2">
         {/* Month Navigation */}
