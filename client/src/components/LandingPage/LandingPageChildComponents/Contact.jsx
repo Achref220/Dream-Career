@@ -1,14 +1,64 @@
+import React, { useState } from 'react';
 import { Container, TextField, Button, InputAdornment } from "@mui/material";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdOutlineMail } from "react-icons/md";
 import { LuBuilding2 } from "react-icons/lu";
+import emailjs from 'emailjs-com';
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    from_name: '',  // from_name now matches the EmailJS template
+    from_email: '', // from_email matches the template as well
+    from_club: '',  // from_club for the club input
+    message: '',    // message for the question field
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    const templateParams = {
+      from_name: formData.from_name,
+      from_email: formData.from_email,
+      from_club: formData.from_club,
+      message: formData.message,
+    };
+
+    emailjs.send('service_7i3mlgq', 'template_8sf01d7', templateParams, 'user_cXrxoulOrzG3kAmHG1Txm')
+      .then((result) => {
+        toast.success(`Message sent successfully!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }, (error) => {
+        console.log(error);
+        toast.error(`An error occurred, please try again later.`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+
+    setFormData({ from_name: '', from_email: '', from_club: '', message: '' });
+  };
+
   return (
-    <div
-      id="contact"
-      className="bg-[#00CDE1] md:pt-[120px] pt-[60px] pb-[40px]"
-    >
+    <div id="contact" className="bg-[#00CDE1] md:pt-[120px] pt-[60px] pb-[40px]">
       <Container>
         {/* Heading Section */}
         <div className="mb-[16px]">
@@ -22,14 +72,17 @@ const Contact = () => {
         </div>
 
         {/* Form Section */}
-        <form>
+        <form onSubmit={sendEmail}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] mb-[16px]">
             {/* Name Input */}
             <TextField
               fullWidth
+              name="from_name"
               placeholder="Enter your full name"
               variant="outlined"
               className="text-inter rounded-[6px]"
+              value={formData.from_name}
+              onChange={handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -60,9 +113,12 @@ const Contact = () => {
             {/* Email Input */}
             <TextField
               fullWidth
+              name="from_email"
               placeholder="Enter your email"
               variant="outlined"
               className="text-inter rounded-[6px]"
+              value={formData.from_email}
+              onChange={handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -93,9 +149,12 @@ const Contact = () => {
             {/* Club Input */}
             <TextField
               fullWidth
+              name="from_club"
               placeholder="Enter your club"
               variant="outlined"
               className="text-inter rounded-[6px]"
+              value={formData.from_club}
+              onChange={handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -123,18 +182,28 @@ const Contact = () => {
               }}
             />
           </div>
+
           {/* Question Input */}
           <TextField
             fullWidth
+            name="message"
             placeholder="Enter your question"
             variant="outlined"
             className="text-inter rounded-[6px]"
             multiline
             rows={4}
+            value={formData.message}
+            onChange={handleChange}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start" className="">
-                  <img src="/assets/message-circle-question.svg" alt="crl" width={24} height={24} className="mt-0 w-fit h-fit"/>
+                <InputAdornment position="start">
+                  <img
+                    src="/assets/message-circle-question.svg"
+                    alt="crl"
+                    width={24}
+                    height={24}
+                    className="mt-0 w-fit h-fit"
+                  />
                 </InputAdornment>
               ),
               sx: {
@@ -170,6 +239,7 @@ const Contact = () => {
                 color: "#000",
                 "&:hover": { backgroundColor: "#e0e0e0" },
               }}
+              type="submit"
             >
               Submit
             </Button>
