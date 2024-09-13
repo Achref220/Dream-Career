@@ -26,6 +26,8 @@ export default function AppShowcase() {
                   src="/assets/share-mobiles.svg" // Replace with your image path
                   alt="Mobile App 1"
                   className="w-full h-auto mt-auto"
+                  width="937"
+                  height="493"
                 />
               </div>
             </Box>
@@ -49,8 +51,10 @@ export default function AppShowcase() {
               <div className="max-h-[591.1px] w-full">
                 <img
                   src="/assets/climb-mobiles.svg" // Replace with your image path
-                  alt="Mobile App 1"
+                  alt="Mobile App 2"
                   className="w-full h-auto mt-auto"
+                  width="937"
+                  height="591"
                 />
               </div>
             </Box>
@@ -75,6 +79,8 @@ export default function AppShowcase() {
                   src="/assets/track-mobiles.svg"
                   alt="Mobile App 3"
                   className="w-full h-full mt-auto"
+                  width="937" 
+                  height="520" 
                 />
               </div>
             </Box>
@@ -109,13 +115,17 @@ export default function AppShowcase() {
                       src="/assets/post-img1.png"
                       alt="Mobile App 4"
                       className="w-full h-full object-cover"
+                      width="400"
+                      height="500"
                     />
                   </div>
                   <div className="w-[40%]">
                     <img
                       src="/assets/post-img2.png"
-                      alt="Mobile App 4"
+                      alt="Mobile App 5"
                       className="w-full h-full object-cover rounded-tl-lg overflow-hidden"
+                      width="250"
+                      height="500" 
                     />
                   </div>
                 </div>
@@ -142,6 +152,8 @@ export default function AppShowcase() {
                   src="/assets/stars.svg"
                   alt="Mobile App 6"
                   className="w-full sm:max-h-[65px] max-h-[40px] pe-[10px]"
+                  width="200"
+                  height="65"
                 />
               </Box>
             </Grid>
@@ -155,8 +167,10 @@ export default function AppShowcase() {
               <div className="w-full">
                 <img
                   src="/assets/chat-mobiles.svg"
-                  alt="Mobile App 3"
+                  alt="Mobile App 7"
                   className="w-full h-auto mt-auto"
+                  width="937"
+                  height="600"
                 />
               </div>
             </Box>

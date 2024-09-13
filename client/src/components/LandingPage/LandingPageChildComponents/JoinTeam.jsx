@@ -8,6 +8,8 @@ const JoinTeam = () => {
         className="absolute w-full h-full object-cover z-[1]"
         src="/assets/join-team-bg.png"
         alt="join-team"
+        width="1920"
+        height="1080"
       />
       <Container>
         <div className="py-[73px] items-center flex-wrap gap-[30px] text-white flex justify-between relative z-[2]">
@@ -18,7 +20,7 @@ const JoinTeam = () => {
               sx={{ fontWeight: "800" }}
               className="md:text-[40px] text-[35px] md:leading-[57.6px]"
             >
-              Dream Careeer
+              Dream Career
             </Typography>
             <Typography
               variant="body1"

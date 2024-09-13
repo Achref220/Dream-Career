@@ -5,9 +5,11 @@ export default function Hero() {
   return (
     <div className="bg-white relative">
       <img
-        src="/assets/hero-bg.svg"
+        src="/assets/hero-bg-optimized.svg"
         alt="Dreaca Mobile Preview"
         className="absolute w-full h-full object-cover"
+        width="1920"
+        height="1080" 
       />
       <Container className="py-[65px]">
         <Grid container spacing={3} alignItems="center">
@@ -20,6 +22,8 @@ export default function Hero() {
                 src="/assets/mobiles.svg"
                 alt="Dreaca Mobile Preview"
                 className="max-w-[937.52px] xl:w-full lg:w-[800px] md:w-[700px] sm:w-[580px] w-[290px] h-auto mx-auto"
+                width="937"
+                height="1700"
               />
             </div>
 
@@ -45,6 +49,8 @@ export default function Hero() {
                     className="md:max-w-[211.43px] max-w-[170px]"
                     src="/assets/play-store.svg"
                     alt="Google Play"
+                    width="211"
+                    height="62"
                   />
                 </Button>
                 <Button href="https://www.apple.com/app-store/" target="_blank">
@@ -52,6 +58,8 @@ export default function Hero() {
                     className="md:max-w-[211.43px] max-w-[170px]"
                     src="/assets/app-store.svg"
                     alt="App Store"
+                    width="211"
+                    height="62"
                   />
                 </Button>
               </div>

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { register, login } = require("../controllers/auth-controller");
+const { register, login, verifyEmail, verifyCaptcha } = require("../controllers/auth-controller");
 
 /** Middlewares */
 const { emailExists, userNameExists } = require("../middleware/middleware");
@@ -77,5 +77,8 @@ router.post("/login", login);
  */
 
 router.post("/register", userNameExists, emailExists, register);
+
+router.post("/verify-email", verifyEmail);
+router.post("/verify-captcha", verifyCaptcha);
 
 module.exports = router;

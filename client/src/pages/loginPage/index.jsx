@@ -26,6 +26,7 @@ import WidgetWrapper from "../../components/CustomStyledComponents/WidgetWrapper
 
 
 import "./index.css";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const initialValuesRegister = {
   username: "",
@@ -46,6 +47,7 @@ const Form = () => {
   const location = useLocation().pathname.slice(1);
   const [pageType, setPageType] = useState(location); //To turn '/register' to 'register'
   const [loading, setLoading] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const { palette } = useTheme();
   const dispatch = useDispatch();
@@ -57,9 +59,8 @@ const Form = () => {
   const register = async (values, onSubmitProps) => {
     const { username, email, location, occupation, password } = values;
     setLoading(true);
-
+  
     try {
-      console.log(process.env.REACT_APP_ENV);
       const res = await fetch(SERVER_URL + "register", {
         method: "POST",
         body: JSON.stringify({
@@ -71,19 +72,17 @@ const Form = () => {
         }),
         headers: { "Content-Type": "application/json" },
       });
-
+  
       const data = await res.json();
-
+  
       if (res.ok) {
-        dispatch(
-          setLogin({
-            user: data.newUser,
-            token: data.token,
-          })
-        );
-        dispatch(setPerson({ person: data.newUser }));
-        onSubmitProps.resetForm();
-        toast.success("Account created !!!", {
+        // Save email to localStorage for verification
+        localStorage.setItem("email", email);
+  
+        // Navigate to verification page
+        navigate("/verify-email");
+        
+        toast.success("Account created! Please verify your email.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -93,7 +92,6 @@ const Form = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/");
       } else {
         toast.error("Something went wrong !!!", {
           position: "top-right",
@@ -112,6 +110,7 @@ const Form = () => {
     }
     setLoading(false);
   };
+  
 
   const login = async (values, onSubmitProps) => {
     setLoading(true);
@@ -168,8 +167,39 @@ const Form = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    if (isRegister) await register(values, onSubmitProps);
-    if (isLogin) await login(values, onSubmitProps);
+    if (!recaptchaToken) {
+      toast.error("Please verify the reCAPTCHA.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+  
+    const res = await fetch(SERVER_URL + "verify-captcha", {
+      method: "POST",
+      body: JSON.stringify({
+        token: recaptchaToken
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+  
+    const verificationResponse = await res.json();
+  
+    if (verificationResponse.success) {
+      if (isRegister) await register(values, onSubmitProps);
+      if (isLogin) await login(values, onSubmitProps);
+    } else {
+      alert("Captcha verification failed. Please try again.");
+    }
+  };
+  const onChange = (token) => {
+    setRecaptchaToken(token);
   };
 
   return (
@@ -318,6 +348,10 @@ const Form = () => {
                     }
                     helperText={touched.password && errors.password}
                     sx={{ gridColumn: "span 4" }}
+                  />
+                  <ReCAPTCHA
+                    sitekey={process.env.REACT_APP_SITE_KEY}
+                    onChange={onChange}
                   />
                 </Box>
 

@@ -73,6 +73,12 @@ const userSchema = new Schema(
       type: Number,
       match: [/^[0-9]+$/, "impressions can only contain numbers"],
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verificationCode: String,
+    verificationCodeExpires: Date,
   },
   {
     timestamps: true,
