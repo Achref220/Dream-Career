@@ -6,7 +6,7 @@ const JoinTeam = () => {
     <section className="relative">
       <img
         className="absolute w-full h-full object-cover z-[1]"
-        src="/assets/join-team-bg.png"
+        src="/assets/join-team-bg.webp"
         alt="join-team"
         width="1920"
         height="1080"

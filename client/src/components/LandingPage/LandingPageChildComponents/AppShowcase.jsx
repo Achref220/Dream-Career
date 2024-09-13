@@ -112,7 +112,7 @@ export default function AppShowcase() {
                 <div className="flex gap-[10px] w-full">
                   <div className="w-[60%]">
                     <img
-                      src="/assets/post-img1.png"
+                      src="/assets/post-img1.webp"
                       alt="Mobile App 4"
                       className="w-full h-full object-cover"
                       width="400"
@@ -121,7 +121,7 @@ export default function AppShowcase() {
                   </div>
                   <div className="w-[40%]">
                     <img
-                      src="/assets/post-img2.png"
+                      src="/assets/post-img2.webp"
                       alt="Mobile App 5"
                       className="w-full h-full object-cover rounded-tl-lg overflow-hidden"
                       width="250"
