@@ -1,436 +1,66 @@
-import React from "react";
-import Navbar from "../../components/navbar";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Divider } from '@mui/material';
+import React from 'react';
+import ClubBar from './clubBar';
+import ClubBox from './clubBox';
+import style from './style.module.scss'
+import Navbar from '../../components/navbar';
 
-const Leaderboard = () => {
-  let clubs = [
-    {
-      clubName: "Club 1",
-      ClubPoints: "1260",
-    },
-    {
-      clubName: "Club 2",
-      ClubPoints: "900",
-    },
-    {
-      clubName: "Club 3",
-      ClubPoints: "800",
-    },
-    {
-      clubName: "Club 4",
-      ClubPoints: "600",
-    },
-    {
-      clubName: "Club 5",
-      ClubPoints: "202",
-    },
-  ];
-  return (
-    <>
+const Leaderbord = () => {
+    return (
+      <>
       <Navbar />
-      <div
-        style={{
-          position: "relative",
-          backgroundColor: "#fff",
-          width: "100%",
-          height: "861px",
-          overflow: "hidden",
-          textAlign: "left",
-          fontSize: "16px",
-          color: "#00cde1",
-          fontFamily: "'Fira Sans'",
-        }}
-      >
-        <Typography
-        fontWeight="bold"
-        textAlign="center"
-        paddingTop="5rem"
-        fontSize="clamp(1rem, 2rem, 2.25rem)"
-        color={"primary"}
-        sx={{
-          "&:hover": {
-            color: "grey",
-            cursor: "pointer",
-          },
-        }}
-      >
-        CLUBS LEADERBOARD
-      </Typography>
-        <div
-          style={{
-            position: "absolute",
-            bottom: "0px",
-            left: "calc(50% - 699px)",
-            width: "1398px",
-            height: "741px",
-            overflow: "hidden",
-            textAlign: "center",
-            fontSize: "34px",
-            color: "#fff",
-            fontFamily: "'Plus Jakarta Sans'",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: "-16.4px",
-              left: "526px",
-              width: "341px",
-              height: "579.4px",
-              fontSize: "48px",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "73.4px",
-                left: "34px",
-                borderRadius: "138.5px",
-                backgroundColor: "#ffca28",
-                width: "277px",
-                height: "506px",
-              }}
-            />
-            <img
-              style={{
-                position: "absolute",
-                top: "70.9px",
-                left: "66.9px",
-                borderRadius: "50%",
-                border: "7px solid #ffca28",
-                boxSizing: "border-box",
-                width: "210.9px",
-                height: "210.9px",
-              }}
-              src="https://www.shutterstock.com/image-vector/vector-graphic-red-black-symbol-600nw-222723730.jpg"
-              alt="firstimg"
-            />
-            {/* <img
-            style={{
-              position: "absolute",
-              top: "107.2px",
-              left: "103.1px",
-              width: "138.4px",
-              height: "138.4px",
-            }}
-            alt=""
-            src="/profile.svg"
-          /> */}
-            <b
-              style={{
-                position: "absolute",
-                top: "298.4px",
-                left: "0px",
-                lineHeight: "150%",
-                display: "inline-block",
-                width: "341px",
-                height: "56px",
-              }}
-            >
-              <Typography
-              fontWeight="bold"
-              textAlign="center"
-              paddingTop="1rem"
-              fontSize="clamp(1rem, 2rem, 2.25rem)"
-              >
-              Club 1
-            </Typography>
-              </b>
-            <div
-              style={{
-                position: "absolute",
-                top: "238.4px",
-                left: "142px",
-                borderRadius: "50%",
-                backgroundColor: "#ffca28",
-                boxShadow: "0px 4px 13px 4px rgba(0, 0, 0, 0.25)",
-                width: "59px",
-                height: "59px",
-              }}
-            />
-            <b
-              style={{
-                position: "absolute",
-                top: "calc(50% - 58.3px)",
-                left: "calc(50% - 9.5px)",
-                lineHeight: "150%",
-                display: "inline-block",
-                width: "21px",
-                height: "54px",
-                textShadow: "0px 0px 13px rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              1
-            </b>
-            {/* <img
-            style={{
-              position: "absolute",
-              top: "16.4px",
-              left: "182.6px",
-              width: "156.5px",
-              height: "140.1px",
-              overflow: "hidden",
-            }}
-            alt=""
-            src="/crown.svg"
-          /> */}
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: "153.5px",
-              left: "858.4px",
-              width: "139.2px",
-              height: "139.2px",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "-6.5px",
-                left: "-21.4px",
-                borderRadius: "100px",
-                backgroundColor: "#00cde1",
-                width: "184px",
-                height: "383px",
-              }}
-            />
-            <b
-              style={{
-                position: "absolute",
-                top: "167.5px",
-                left: "-50.4px",
-                lineHeight: "150%",
-                display: "inline-block",
-                width: "240px",
-                height: "60px",
-              }}
-            >
-              <Typography
-              fontWeight="bold"
-              textAlign="center"
-              fontSize="clamp(1rem, 2rem, 2.25rem)"
-              >
-              Club 3
-            </Typography>
-            </b>
-            <img
-              style={{
-                position: "absolute",
-                top: "-4px",
-                left: "-7px",
-                borderRadius: "50%",
-                width: "153.2px",
-                height: "153.2px",
-                objectFit: "cover",
-              }}
-              alt=""
-              src="https://i.pinimg.com/originals/70/ec/35/70ec351aa029af30ebcb3acc888b328f.jpg"
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: "60.5px",
-                left: "42.1px",
-                width: "41px",
-                height: "41px",
-                fontSize: "35px",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: "51px",
-                  left: "9px",
-                  borderRadius: "50%",
-                  backgroundColor: "#00cde1",
-                  boxShadow: "0px 4px 13px 4px rgba(0, 0, 0, 0.25)",
-                  width: "49px",
-                  height: "49px",
-                }}
-              />
-              <b
-                style={{
-                  position: "absolute",
-                  top: "calc(50% + 29.5px)",
-                  left: "calc(50% + 3.5px)",
-                  lineHeight: "150%",
-                  display: "inline-block",
-                  width: "18px",
-                  height: "41px",
-                  textShadow: "0px 0px 13px rgba(0, 0, 0, 0.25)",
-                }}
-              >
-                3
-              </b>
+        <Container maxWidth="lg" style={{ paddingBottom: '2rem', position: 'relative' }}>
+            <h1 className={style.title}>Leaderboard</h1>
+            <div className={style.bgMobile}>
+                {/* <img src={bgM} /> */}
             </div>
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: "117px",
-              left: "359px",
-              width: "201px",
-              height: "420px",
-              overflow: "hidden",
-              fontSize: "35px",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "0px",
-                left: "0px",
-                borderRadius: "100.5px",
-                backgroundColor: "#089f20",
-                width: "201px",
-                height: "420px",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: "6px",
-                left: "25px",
-                width: "152px",
-                height: "151px",
-              }}
+            <Box
+                border="1px solid #D6D6D9"
+                p={2}
+                bgcolor="#EAFDFF"
+                borderRadius='16px'
+                boxShadow="0px 0px 32px -8px #0000001F"
+                className={style.mainBox}
             >
-              <img
-              style={{
-                position: "absolute",
-                top: "-3px",
-                left: "-7px",
-                borderRadius: "50%",
-                width: "166px",
-                height: "164px",
-                objectFit: "cover",
-              }}
-              alt="sqd"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScIqgXN3Lrw2VFHfupxomMUmKicme7Nd74Pg&s"
-            />
-              <div
-                style={{
-                  position: "absolute",
-                  top: "71px",
-                  left: "44px",
-                  width: "44.8px",
-                  height: "44.8px",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "59px",
-                    left: "11px",
-                    borderRadius: "50%",
-                    backgroundColor: "#089f20",
-                    boxShadow: "0px 4px 13px 4px rgba(0, 0, 0, 0.25)",
-                    width: "49px",
-                    height: "48px",
-                  }}
-                />
-                <b
-                  style={{
-                    position: "absolute",
-                    top: "calc(50% + 30.6px)",
-                    left: "calc(50% + 4.6px)",
-                    lineHeight: "150%",
-                    display: "inline-block",
-                    width: "18px",
-                    height: "41px",
-                    textShadow: "0px 0px 13px rgba(0, 0, 0, 0.25)",
-                  }}
+                <Box
+                    className={style.leftBox}
                 >
-                  2
-                </b>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: "309px",
-              left: "calc(50% - 320px)",
-              width: "157px",
-              height: "51px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <b
-              style={{
-                position: "relative",
-                lineHeight: "150%",
-                display: "inline-block",
-                width: "206px",
-              }}
-            >
-              <Typography
-              fontWeight="bold"
-              textAlign="center"
-              fontSize="clamp(1rem, 2rem, 2.25rem)"
-              >
-              Club 2
-            </Typography>
-            </b>
-          </div>
-          <div
-            style={{
-              position: "relative",
-              top: "370px",
-              left: "0px",
-              borderRadius: "32px 32px 0px 0px",
-              backgroundColor: "#d9f7fa",
-              width: "1398px",
-              height: "487px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            {clubs.map((cl, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: "90%",
-                  color: "black",
-                  marginBottom: "10px",
-                  borderRadius: "20px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  backgroundColor:
-                    index === 0
-                      ? "#FFFF00"
-                      : index === 1
-                      ? "green" 
-                      : index === 2
-                      ? "#14b3c1"
-                      : "#ffff",
-                }}
-              >
-                <Typography
-                  marginLeft={"10px"}
-                  fontSize="clamp(1rem, 2rem, 2.25rem)"
+                    <Box className={style.inner} display="flex" flexDirection="row" alignItems="flex-end" justifyContent="center">
+                        <ClubBar rank={2} clubName="Club 2" finalPoints={38} image="/assets/images/club1.png" bgColor="#B4B2B3" />
+                        <ClubBar rank={1} clubName="Club 1" finalPoints={39} isWinner image="/assets/images/club2.png" />
+                        <ClubBar rank={3} clubName="Club 3" finalPoints={37} image="/assets/images/club3.png" bgColor="#A0621C" />
+                    </Box>
+                    <img src="/assets/images/bg-clubBar-d.png" className={style.bgImage} alt='bgimg'/>
+                </Box>
+
+                <Box
+                    className={style.rightBox}
                 >
-                  {cl.clubName}
-                </Typography>
-                <Typography
-                  marginRight={"10px"}
-                  fontSize="clamp(1rem, 2rem, 2.25rem)"
-                >
-                  {cl.ClubPoints}
-                </Typography>
-              </Box>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                    <div className={style.inner}>
+
+
+                        {/* Right Box Content */}
+                        {[...Array(6)].map((_, index) => (
+                            <React.Fragment key={index}>
+                                <ClubBox
+                                    rank={index + 4} // Using direct index + 4 for rank
+                                    clubName={`Club ${index + 4}`}
+                                    points={`${(index + 4) * 10}`}
+                                />
+                                {index < 5 && (
+                                    <Divider
+                                        sx={{ borderColor: '#D6D6D9', width: '100%', mx: 'auto', my: 1 }} // Centered with reduced width
+                                    />
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </div>
+                </Box>
+            </Box>
+        </Container>
+      </>
+        
+    );
 };
 
-export default Leaderboard;
+export default Leaderbord;

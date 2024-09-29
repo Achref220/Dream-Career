@@ -11,6 +11,7 @@ import ProfilePage from './pages/profilePage'
 import DirectMessagePage from './pages/DirectMessagePage'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './assets/fonts/fonts.css';
 
 
 

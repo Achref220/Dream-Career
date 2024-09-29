@@ -195,7 +195,16 @@ const Form = () => {
       if (isRegister) await register(values, onSubmitProps);
       if (isLogin) await login(values, onSubmitProps);
     } else {
-      alert("Captcha verification failed. Please try again.");
+      toast.error("Captcha verification failed. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const onChange = (token) => {
@@ -225,7 +234,7 @@ const Form = () => {
       >
         <WidgetWrapper
           width={isNonMobile ? "500px" : "370px"}
-          sx={{ borderRadius: "50px" }}
+          sx={{ borderRadius: "50px", maxHeight: "600px", overflow: "scroll"}}
           className="wdwrapper"
         >
           {!isNonMobile ? (
@@ -256,7 +265,7 @@ const Form = () => {
               <form onSubmit={handleSubmit} id="authForm">
                 <Box
                   display="grid"
-                  gap="30px"
+                  gap="5px"
                   padding="1.5rem"
                   gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   sx={{
@@ -267,6 +276,18 @@ const Form = () => {
                 >
                   {isRegister && (
                     <>
+                    <TextField
+                        label="Full Name"
+                        onBlur={handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        value={values.fullName}
+                        name="FullName"
+                        error={Boolean(touched.FullName) && Boolean(errors.FullName)}
+                        helperText={touched.FullName && errors.FullName}
+                        sx={{ gridColumn: "span 4" }}
+                      />
                       <TextField
                         label="Email"
                         onBlur={handleBlur}
@@ -277,6 +298,18 @@ const Form = () => {
                         name="email"
                         error={Boolean(touched.email) && Boolean(errors.email)}
                         helperText={touched.email && errors.email}
+                        sx={{ gridColumn: "span 4" }}
+                      />
+                      <TextField
+                        label="Phone Number"
+                        onBlur={handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        value={values.PhoneNumber}
+                        name="FullName"
+                        error={Boolean(touched.PhoneNumber) && Boolean(errors.PhoneNumber)}
+                        helperText={touched.PhoneNumber && errors.PhoneNumber}
                         sx={{ gridColumn: "span 4" }}
                       />
                       <TextField
@@ -291,6 +324,32 @@ const Form = () => {
                         helperText={touched.location && errors.location}
                         sx={{ gridColumn: "span 4" }}
                       />
+                      <FormControl
+                        error={
+                          Boolean(touched.occupation) &&
+                          Boolean(errors.occupation)
+                        }
+                        sx={{ gridColumn: "span 4" }}
+                      >
+                        <InputLabel id="occupation-label">
+                          Gender
+                        </InputLabel>
+                        <Select
+                          labelId="Gender-label"
+                          id="Gender"
+                          name="Gender"
+                          value={values.Gender}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          label="Gender"
+                        >
+                          <MenuItem value="Male">Male</MenuItem>
+                          <MenuItem value="Female">Female</MenuItem>
+                        </Select>
+                        {touched.Gender && errors.Gender && (
+                          <FormHelperText>{errors.Gender}</FormHelperText>
+                        )}
+                      </FormControl>
                       <FormControl
                         error={
                           Boolean(touched.occupation) &&
