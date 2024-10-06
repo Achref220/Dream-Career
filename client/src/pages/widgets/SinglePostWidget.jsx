@@ -20,6 +20,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import FeedBack from "../feedback";
 
 const SinglePostWidget = ({
   postId,
@@ -106,8 +107,6 @@ const SinglePostWidget = ({
 
   const handleSubmit = () => {
     // Handle the form submission logic here
-    console.log("Rating:", rating);
-    console.log("Review:", reviewText);
     setOpen(false);
     // Make API call to submit the rating and review
     toast.error("Please note that this feature is still under development.", {
@@ -250,39 +249,7 @@ const SinglePostWidget = ({
 
       {/* Dialog Popup */}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Submit Your Review</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please provide your rating and a review for the current event.
-          </DialogContentText>
-          
-          <ReactStars
-            count={5}
-            size={30}
-            isHalf={true}
-            activeColor="#ffd700"
-            value={rating} // Display the selected rating
-            edit={false} // Make the stars non-editable
-          />
-       
-          <TextField
-            autoFocus
-            margin="dense"
-            id="review"
-            label="Review"
-            type="text"
-            fullWidth
-            variant="outlined"
-            multiline
-            rows={4}
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Submit</Button>
-        </DialogActions>
+        <FeedBack rating={rating}/>
       </Dialog>
 
       <Box sx={{ padding: !isNonMobileScreens ? "0 0.75rem" : "" }}>
