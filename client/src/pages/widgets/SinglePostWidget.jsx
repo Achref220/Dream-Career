@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../../state";
 import { fToNow } from "../../utils/formatDate";
 import { FavoriteBorderOutlined, FavoriteOutlined } from "@mui/icons-material";
-import { toast } from "react-toastify";
 import {
-  Box, IconButton, Typography, useMediaQuery, useTheme, Dialog, DialogActions,
-  DialogContent, DialogContentText, DialogTitle, Button, TextField
+  Box, IconButton, Typography, useMediaQuery, useTheme, Dialog
 } from "@mui/material";
 import FlexBetween from "../../components/CustomStyledComponents/FlexBetween";
 import Following from "../../components/Following";
@@ -39,7 +37,6 @@ const SinglePostWidget = ({
   const [isLongCaption, setIsLongCaption] = useState(false);
   const [rating, setRating] = useState(0); // Add state for rating
   const [open, setOpen] = useState(false); // State to control dialog
-  const [reviewText, setReviewText] = useState(""); // State to handle review text
   const theme = useTheme()
 
   const isNonMobileScreens = useMediaQuery("(min-width: 800px)");
@@ -105,21 +102,6 @@ const SinglePostWidget = ({
     setOpen(false);
   };
 
-  const handleSubmit = () => {
-    // Handle the form submission logic here
-    setOpen(false);
-    // Make API call to submit the rating and review
-    toast.error("Please note that this feature is still under development.", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
 
   useEffect(() => {
     getLikes();
