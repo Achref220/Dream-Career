@@ -4,7 +4,7 @@ import { setPost } from "../../state";
 import { fToNow } from "../../utils/formatDate";
 import { FavoriteBorderOutlined, FavoriteOutlined } from "@mui/icons-material";
 import {
-  Box, IconButton, Typography, useMediaQuery, useTheme, Dialog
+  Box, IconButton, Typography, useMediaQuery, useTheme
 } from "@mui/material";
 import FlexBetween from "../../components/CustomStyledComponents/FlexBetween";
 import Following from "../../components/Following";
@@ -16,9 +16,9 @@ import { fShortenNumber } from "../../utils/formatNumber";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 as uuidv4 } from "uuid";
-import ReactStars from "react-rating-stars-component";
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import FeedBack from "../feedback";
+import { useNavigate } from 'react-router-dom';
+
 
 const SinglePostWidget = ({
   postId,
@@ -35,9 +35,8 @@ const SinglePostWidget = ({
   const [isComments, setIsComments] = useState(false);
   const [likeData, setLikeData] = useState(null);
   const [isLongCaption, setIsLongCaption] = useState(false);
-  const [rating, setRating] = useState(0); // Add state for rating
-  const [open, setOpen] = useState(false); // State to control dialog
   const theme = useTheme()
+  const navigate = useNavigate();
 
   const isNonMobileScreens = useMediaQuery("(min-width: 800px)");
   const imageHeight = isNonMobileScreens ? "450px" : "300px";
@@ -94,13 +93,9 @@ const SinglePostWidget = ({
   };
 
   const handleClickOpen = (newRating) => {
-    setRating(newRating); // Set the selected rating
-    setOpen(true); // Open the dialog
+    navigate(`/review/${postId}`);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
 
   useEffect(() => {
@@ -213,26 +208,14 @@ const SinglePostWidget = ({
         {/* Star Rating */}
         <FlexBetween>
           <Box sx={{ display: "flex", justifyContent: "center", borderRadius: "30px", border: "1px solid",borderColor: theme.palette.background.light, paddingRight: "5px", paddingLeft: "5px", gap: "5px"}}>
-            <ReactStars
-              count={5}
-              onChange={handleClickOpen} // Open the dialog on star click
-              size={23}
-              isHalf={true}
-              activeColor="#ffd700"
-              value={rating}
-            />
+            
 
-          <Typography color={theme.palette.background.light} sx={{ mt: "0.6rem", fontWeight: 600, fontSize: "11px" }}>
+          <Typography onClick={handleClickOpen} color={theme.palette.background.light} sx={{ m: "0.2rem", fontWeight: 600, fontSize: "11px", cursor: "pointer" }}>
             Send your Feedback
           </Typography>
           </Box>
         </FlexBetween>
       </FlexBetween>
-
-      {/* Dialog Popup */}
-      <Dialog open={open} onClose={handleClose}>
-        <FeedBack rating={rating}/>
-      </Dialog>
 
       <Box sx={{ padding: !isNonMobileScreens ? "0 0.75rem" : "" }}>
         {/* Liked By */}

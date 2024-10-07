@@ -32,6 +32,7 @@ import Leaderboard from './pages/Leaderboard/index'
 import Calendar from './components/Calendar'
 import Landingpage from './components/LandingPage/Landingpage'
 import VerifyEmail from './pages/VerifyEmail'
+import Review from './pages/Review'
 
 
 const App = () => { 
@@ -73,6 +74,8 @@ const App = () => {
         </Route>
 
         <Route path="/settings" element={isLoggedIn ? <Settings /> : <Navigate to="/login" />} />
+
+        <Route path="/review/:postId" element={isLoggedIn ? <Review /> : <Navigate to="/login" />} />
 
         <Route path="/leaderboard" element={isLoggedIn ? <Leaderboard /> : <Navigate to="/login" />} />
 
